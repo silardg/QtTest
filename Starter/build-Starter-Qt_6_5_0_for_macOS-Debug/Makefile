@@ -54,7 +54,8 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../Starter/main.cpp 
 OBJECTS       = main.o
-DIST          = /Users/silardgal/Qt/6.5.0/macos/mkspecs/features/spec_pre.prf \
+DIST          = ../Starter/README.md \
+		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/spec_pre.prf \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/device_config.prf \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/common/unix.conf \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/common/mac.conf \
@@ -179,6 +180,7 @@ DIST          = /Users/silardgal/Qt/6.5.0/macos/mkspecs/features/spec_pre.prf \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/qt_config.prf \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/macx-clang/qmake.conf \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/spec_post.prf \
+		../Starter/.qmake.stash \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/exclusive_builds.prf \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/mac/sdk.prf \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/toolchain.prf \
@@ -217,7 +219,7 @@ TARGET        = basics_app.app/Contents/MacOS/basics_app
 EXPORT_QMAKE_MAC_SDK = macosx
 EXPORT_QMAKE_MAC_SDK_VERSION = 13.3
 EXPORT_QMAKE_XCODE_DEVELOPER_PATH = /Library/Developer/CommandLineTools
-EXPORT__QMAKE_STASH_ = 
+EXPORT__QMAKE_STASH_ = /Users/silardgal/Documents/Development/cpp/QtTest/Starter/build-Starter-Qt_6_5_0_for_macOS-Debug/.qmake.stash
 EXPORT_VALID_ARCHS = x86_64 arm64
 EXPORT_DEFAULT_ARCHS = arm64
 EXPORT_ARCHS = $(filter $(EXPORT_VALID_ARCHS), $(if $(ARCHS), $(ARCHS), $(if $(EXPORT_DEFAULT_ARCHS), $(EXPORT_DEFAULT_ARCHS), $(EXPORT_VALID_ARCHS))))
@@ -358,6 +360,7 @@ Makefile: ../Starter/Starter.pro /Users/silardgal/Qt/6.5.0/macos/mkspecs/macx-cl
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/qt_config.prf \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/macx-clang/qmake.conf \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/exclusive_builds.prf \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/mac/sdk.prf \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/toolchain.prf \
@@ -517,6 +520,7 @@ Makefile: ../Starter/Starter.pro /Users/silardgal/Qt/6.5.0/macos/mkspecs/macx-cl
 /Users/silardgal/Qt/6.5.0/macos/mkspecs/features/qt_config.prf:
 /Users/silardgal/Qt/6.5.0/macos/mkspecs/macx-clang/qmake.conf:
 /Users/silardgal/Qt/6.5.0/macos/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /Users/silardgal/Qt/6.5.0/macos/mkspecs/features/exclusive_builds.prf:
 /Users/silardgal/Qt/6.5.0/macos/mkspecs/features/mac/sdk.prf:
 /Users/silardgal/Qt/6.5.0/macos/mkspecs/features/toolchain.prf:
@@ -589,6 +593,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r basics_app.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -628,7 +633,9 @@ compiler_clean:
 ####### Compile
 
 main.o: ../Starter/main.cpp /Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/QApplication \
-		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/qapplication.h
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/qapplication.h \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/QPushButton \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/qpushbutton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Starter/main.cpp
 
 ####### Install
