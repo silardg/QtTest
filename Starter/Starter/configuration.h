@@ -9,5 +9,7 @@
 #define windowMainWidth 400
 #define windowMainHeight 400
 
+#define pathIcon ":/content/content/logo.png"
+
 
 #endif // CONFIGURATION_H

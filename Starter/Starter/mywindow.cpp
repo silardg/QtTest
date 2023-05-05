@@ -3,6 +3,10 @@
 #include <configuration.h>
 
 #include <QPushButton>
+#include <QFont>
+#include <QIcon>
+#include <QtResource>
+#include <QSize>
 
 // creates the my window class
 // it takes in a parent class as qwidget
@@ -13,5 +17,23 @@ MyWindow::MyWindow(QWidget *parent)
 {
     setFixedSize(windowMainWidth, windowMainHeight);
 
+    // added a resources file and copied the path to the logo
+    m_iconMain = new QIcon(pathIcon);
+    m_iconSize = new QSize(buttonIconWidth, buttonIconHeight);
+
+    // create an italic courier font
+    m_fontCourier = new QFont("Courier", -1, -1, true);
+
+    // create a button
+    // set the parent as the main window
     m_button = new QPushButton("Testing button!", this);
+    // makes it flat design
+    m_button->setFlat(true);
+    // set courier font for the button
+    m_button->setFont(*m_fontCourier);
+    // set the icon
+    m_button->setIcon(*m_iconMain);
+    m_button->setIconSize(*m_iconSize);
+    // set its position and size
+    m_button->setGeometry(windowMainWidth/4, windowMainHeight/4, buttonWidth, buttonHeight);
 }
