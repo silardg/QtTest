@@ -52,9 +52,13 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../Starter/main.cpp qrc_resources.cpp
+SOURCES       = ../Starter/main.cpp \
+		../Starter/mywindow.cpp qrc_resources.cpp \
+		moc_mywindow.cpp
 OBJECTS       = main.o \
-		qrc_resources.o
+		mywindow.o \
+		qrc_resources.o \
+		moc_mywindow.o
 DIST          = ../Starter/README.md \
 		../Starter/content/logo.png \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/spec_pre.prf \
@@ -212,7 +216,9 @@ DIST          = ../Starter/README.md \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/exceptions.prf \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/yacc.prf \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/lex.prf \
-		../Starter/Starter.pro ../Starter/configuration.h ../Starter/main.cpp
+		../Starter/Starter.pro ../Starter/configuration.h \
+		../Starter/mywindow.h ../Starter/main.cpp \
+		../Starter/mywindow.cpp
 QMAKE_TARGET  = basics_app
 DESTDIR       = 
 TARGET        = basics_app.app/Contents/MacOS/basics_app
@@ -588,8 +594,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../Starter/resources.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../Starter/configuration.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Starter/main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Starter/configuration.h ../Starter/mywindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Starter/main.cpp ../Starter/mywindow.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -624,8 +630,15 @@ qrc_resources.cpp: ../Starter/resources.qrc \
 		../Starter/content/logo.png
 	/Users/silardgal/Qt/6.5.0/macos/libexec/rcc -name resources --no-zstd ../Starter/resources.qrc -o qrc_resources.cpp
 
-compiler_moc_header_make_all:
+compiler_moc_header_make_all: moc_mywindow.cpp
 compiler_moc_header_clean:
+	-$(DEL_FILE) moc_mywindow.cpp
+moc_mywindow.cpp: ../Starter/mywindow.h \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Users/silardgal/Qt/6.5.0/macos/libexec/moc
+	/Users/silardgal/Qt/6.5.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/silardgal/Qt/6.5.0/macos/mkspecs/macx-clang -I/Users/silardgal/Documents/Development/cpp/QtTest/Starter/Starter -I/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers -I/Users/silardgal/Qt/6.5.0/macos/lib/QtGui.framework/Headers -I/Users/silardgal/Qt/6.5.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/Users/silardgal/Qt/6.5.0/macos/lib ../Starter/mywindow.h -o moc_mywindow.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
@@ -640,7 +653,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_rcc_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_header_clean 
 
 ####### Compile
 
@@ -656,11 +669,22 @@ main.o: ../Starter/main.cpp /Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framew
 		/Users/silardgal/Qt/6.5.0/macos/lib/QtCore.framework/Headers/qtresource.h \
 		/Users/silardgal/Qt/6.5.0/macos/lib/QtCore.framework/Headers/QSize \
 		/Users/silardgal/Qt/6.5.0/macos/lib/QtCore.framework/Headers/qsize.h \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
 		../Starter/configuration.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Starter/main.cpp
 
+mywindow.o: ../Starter/mywindow.cpp ../Starter/mywindow.h \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/QPushButton.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mywindow.o ../Starter/mywindow.cpp
+
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
+
+moc_mywindow.o: moc_mywindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mywindow.o moc_mywindow.cpp
 
 ####### Install
 
