@@ -4,12 +4,16 @@
 #include <QIcon>
 #include <QtResource>
 #include <QSize>
+#include <QWidget>
 
 #include <configuration.h>
 
 int main(int argc, char **argv) {
     // create the main app
     QApplication app(argc, argv);
+
+    QWidget mainWindow;
+    mainWindow.setFixedSize(windowMainWidth, windowMainHeight);
 
     // added a resources file and copied the path to the logo
     QIcon iconMain(":/content/content/logo.png");
@@ -19,7 +23,8 @@ int main(int argc, char **argv) {
     QFont fontCourier("Courier", -1, -1, true);
 
     // create a button
-    QPushButton button ("Testing button!");
+    // set the parent as the main window
+    QPushButton button ("Testing button!", &mainWindow);
     // makes it flat design
     button.setFlat(true);
     // set courier font for the button
@@ -28,12 +33,8 @@ int main(int argc, char **argv) {
     button.setIcon(iconMain);
     button.setIconSize(iconSize);
 
-    // creating a child button for the above button
-    QPushButton childButton("Wee wee", &button);
-
     // makes the button visible - from QWidget
-    // when a parent is shown, the children will be shown as well
-    button.show();
+    mainWindow.show();
 
     return app.exec();
 }
