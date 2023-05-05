@@ -9,4 +9,8 @@ SOURCES += \
     main.cpp
 
 DISTFILES += \
-    README.md
+    README.md \
+    content/logo.png
+
+RESOURCES += \
+    resources.qrc

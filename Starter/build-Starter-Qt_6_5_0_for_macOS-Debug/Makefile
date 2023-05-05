@@ -52,9 +52,11 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../Starter/main.cpp 
-OBJECTS       = main.o
+SOURCES       = ../Starter/main.cpp qrc_resources.cpp
+OBJECTS       = main.o \
+		qrc_resources.o
 DIST          = ../Starter/README.md \
+		../Starter/content/logo.png \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/spec_pre.prf \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/device_config.prf \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/common/unix.conf \
@@ -391,6 +393,7 @@ Makefile: ../Starter/Starter.pro /Users/silardgal/Qt/6.5.0/macos/mkspecs/macx-cl
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/yacc.prf \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/lex.prf \
 		../Starter/Starter.pro \
+		../Starter/resources.qrc \
 		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Resources/QtWidgets.prl \
 		/Users/silardgal/Qt/6.5.0/macos/lib/QtGui.framework/Resources/QtGui.prl \
 		/Users/silardgal/Qt/6.5.0/macos/lib/QtCore.framework/Resources/QtCore.prl
@@ -551,6 +554,7 @@ Makefile: ../Starter/Starter.pro /Users/silardgal/Qt/6.5.0/macos/mkspecs/macx-cl
 /Users/silardgal/Qt/6.5.0/macos/mkspecs/features/yacc.prf:
 /Users/silardgal/Qt/6.5.0/macos/mkspecs/features/lex.prf:
 ../Starter/Starter.pro:
+../Starter/resources.qrc:
 /Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Resources/QtWidgets.prl:
 /Users/silardgal/Qt/6.5.0/macos/lib/QtGui.framework/Resources/QtGui.prl:
 /Users/silardgal/Qt/6.5.0/macos/lib/QtCore.framework/Resources/QtCore.prl:
@@ -583,6 +587,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../Starter/resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../Starter/main.cpp $(DISTDIR)/
 
 
@@ -610,8 +615,14 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_resources.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_resources.cpp
+qrc_resources.cpp: ../Starter/resources.qrc \
+		/Users/silardgal/Qt/6.5.0/macos/libexec/rcc \
+		../Starter/content/logo.png
+	/Users/silardgal/Qt/6.5.0/macos/libexec/rcc -name resources --no-zstd ../Starter/resources.qrc -o qrc_resources.cpp
+
 compiler_moc_header_make_all:
 compiler_moc_header_clean:
 compiler_moc_objc_header_make_all:
@@ -628,15 +639,24 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: 
+compiler_clean: compiler_rcc_clean 
 
 ####### Compile
 
 main.o: ../Starter/main.cpp /Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/QApplication \
 		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/qapplication.h \
 		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/QPushButton \
-		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/qpushbutton.h
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtGui.framework/Headers/QFont \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtGui.framework/Headers/qfont.h \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtGui.framework/Headers/QIcon \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtGui.framework/Headers/qicon.h \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtCore.framework/Headers/QtResource \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtCore.framework/Headers/qtresource.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Starter/main.cpp
+
+qrc_resources.o: qrc_resources.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
 
 ####### Install
 
