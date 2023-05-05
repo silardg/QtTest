@@ -32,6 +32,7 @@ int main(int argc, char **argv) {
     // set the icon
     button.setIcon(iconMain);
     button.setIconSize(iconSize);
+    button.setGeometry(windowMainWidth/4, windowMainHeight/4, buttonWidth, buttonHeight);
 
     // makes the button visible - from QWidget
     mainWindow.show();
