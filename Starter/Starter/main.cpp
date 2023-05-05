@@ -5,13 +5,15 @@
 #include <QtResource>
 #include <QSize>
 
+#include <configuration.h>
+
 int main(int argc, char **argv) {
     // create the main app
     QApplication app(argc, argv);
 
     // added a resources file and copied the path to the logo
     QIcon iconMain(":/content/content/logo.png");
-    QSize iconSize(50,50);
+    QSize iconSize(buttonIconWidth, buttonIconHeight);
 
     // create an italic courier font
     QFont fontCourier("Courier", -1, -1, true);

@@ -14,3 +14,6 @@ DISTFILES += \
 
 RESOURCES += \
     resources.qrc
+
+HEADERS += \
+    configuration.h

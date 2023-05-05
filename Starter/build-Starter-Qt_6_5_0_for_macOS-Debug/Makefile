@@ -212,7 +212,7 @@ DIST          = ../Starter/README.md \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/exceptions.prf \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/yacc.prf \
 		/Users/silardgal/Qt/6.5.0/macos/mkspecs/features/lex.prf \
-		../Starter/Starter.pro  ../Starter/main.cpp
+		../Starter/Starter.pro ../Starter/configuration.h ../Starter/main.cpp
 QMAKE_TARGET  = basics_app
 DESTDIR       = 
 TARGET        = basics_app.app/Contents/MacOS/basics_app
@@ -588,6 +588,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../Starter/resources.qrc $(DISTDIR)/
+	$(COPY_FILE) --parents ../Starter/configuration.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../Starter/main.cpp $(DISTDIR)/
 
 
@@ -652,7 +653,10 @@ main.o: ../Starter/main.cpp /Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framew
 		/Users/silardgal/Qt/6.5.0/macos/lib/QtGui.framework/Headers/QIcon \
 		/Users/silardgal/Qt/6.5.0/macos/lib/QtGui.framework/Headers/qicon.h \
 		/Users/silardgal/Qt/6.5.0/macos/lib/QtCore.framework/Headers/QtResource \
-		/Users/silardgal/Qt/6.5.0/macos/lib/QtCore.framework/Headers/qtresource.h
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtCore.framework/Headers/qtresource.h \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtCore.framework/Headers/QSize \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtCore.framework/Headers/qsize.h \
+		../Starter/configuration.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Starter/main.cpp
 
 qrc_resources.o: qrc_resources.cpp 
