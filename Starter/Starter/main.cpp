@@ -27,7 +27,12 @@ int main(int argc, char **argv) {
     // set the icon
     button.setIcon(iconMain);
     button.setIconSize(iconSize);
+
+    // creating a child button for the above button
+    QPushButton childButton("Wee wee", &button);
+
     // makes the button visible - from QWidget
+    // when a parent is shown, the children will be shown as well
     button.show();
 
     return app.exec();
