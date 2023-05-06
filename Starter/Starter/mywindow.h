@@ -13,6 +13,8 @@ class MyWindow : public QWidget
     Q_OBJECT
 public:
     explicit MyWindow(QWidget *parent = nullptr);
+signals:
+    void counterReached();
 private:
     QPushButton *m_button;
     QIcon *m_iconMain;
@@ -20,6 +22,10 @@ private:
     QFont *m_fontCourier;
     QSlider *m_slider;
     QProgressBar *m_progressBar;
+
+    int m_counter = 0;
+private slots:
+    void slotButtonClicked(bool status);
 
 signals:
 

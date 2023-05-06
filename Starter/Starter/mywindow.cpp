@@ -49,7 +49,17 @@ MyWindow::MyWindow(QWidget *parent)
     // this uses the connect function from QObject
     // uses m_button->clicked() function as a SIGNAL
     // it sends that SIGNAL to the QApplication instance, which calls the callback quit
-    connect(m_button, SIGNAL (clicked()), QApplication::instance(), SLOT (quit()));
+    //connect(m_button, SIGNAL (clicked()), QApplication::instance(), SLOT (quit()));
+
+    // set the button to checkable so that the slotButtonClicked can be used as a slot
+    m_button->setCheckable(true);
+
+    // connect the clicked function to the slotButtonClicked
+    connect(m_button, SIGNAL (clicked(bool)), this, SLOT (slotButtonClicked(bool)));
+
+    // connect mywindow counter reached to the quit function
+    connect(this, SIGNAL (counterReached()), QApplication::instance(), SLOT (quit()));
+
 
     // End of button setup
 
@@ -82,3 +92,19 @@ MyWindow::MyWindow(QWidget *parent)
 
 
 }
+
+/**
+ * @brief MyWindow::slotButtonClicked
+ * @param status
+ */
+void MyWindow::slotButtonClicked(bool status) {
+    m_button->setText(status ? "Clicked" : "Not clicked");
+
+    m_counter++;
+
+    // emit the counterReached signal when it is over m_counter
+    if(m_counter > 5) {
+        emit counterReached();
+        m_counter = 0;
+    }
+} // end of slotButtonClicked(bool)
