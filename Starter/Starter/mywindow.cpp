@@ -8,6 +8,8 @@
 #include <QtResource>
 #include <QSize>
 
+#include <QApplication>
+
 // creates the my window class
 // it takes in a parent class as qwidget
 // inherits all the functions from qwidget
@@ -36,4 +38,9 @@ MyWindow::MyWindow(QWidget *parent)
     m_button->setIconSize(*m_iconSize);
     // set its position and size
     m_button->setGeometry(windowMainWidth/4, windowMainHeight/4, buttonWidth, buttonHeight);
+
+    // this uses the connect function from QObject
+    // uses m_button->clicked() function as a SIGNAL
+    // it sends that SIGNAL to the QApplication instance, which calls the callback quit
+    connect(m_button, SIGNAL (clicked()), QApplication::instance(), SLOT (quit()));
 }
