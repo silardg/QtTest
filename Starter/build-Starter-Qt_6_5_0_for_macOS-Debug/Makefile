@@ -659,6 +659,16 @@ compiler_clean: compiler_rcc_clean compiler_moc_header_clean
 
 main.o: ../Starter/main.cpp /Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/QApplication \
 		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/qapplication.h \
+		../Starter/configuration.h \
+		../Starter/mywindow.h \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/qwidget.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Starter/main.cpp
+
+mywindow.o: ../Starter/mywindow.cpp ../Starter/mywindow.h \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		../Starter/configuration.h \
 		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/QPushButton \
 		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		/Users/silardgal/Qt/6.5.0/macos/lib/QtGui.framework/Headers/QFont \
@@ -669,15 +679,12 @@ main.o: ../Starter/main.cpp /Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framew
 		/Users/silardgal/Qt/6.5.0/macos/lib/QtCore.framework/Headers/qtresource.h \
 		/Users/silardgal/Qt/6.5.0/macos/lib/QtCore.framework/Headers/QSize \
 		/Users/silardgal/Qt/6.5.0/macos/lib/QtCore.framework/Headers/qsize.h \
-		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/QWidget \
-		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
-		../Starter/configuration.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Starter/main.cpp
-
-mywindow.o: ../Starter/mywindow.cpp ../Starter/mywindow.h \
-		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/QWidget \
-		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
-		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/QPushButton.h
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/QProgressBar \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/qprogressbar.h \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/QSlider \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/qslider.h \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/QApplication \
+		/Users/silardgal/Qt/6.5.0/macos/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mywindow.o ../Starter/mywindow.cpp
 
 qrc_resources.o: qrc_resources.cpp 

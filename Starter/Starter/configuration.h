@@ -6,6 +6,9 @@
 #define buttonIconWidth 50
 #define buttonIconHeight 50
 
+#define sliderProgressWidth 200
+#define sliderProgressHeight 50
+
 #define windowMainWidth 400
 #define windowMainHeight 400
 

@@ -6,6 +6,8 @@
 class QPushButton;
 class QIcon;
 class QSize;
+class QSlider;
+class QProgressBar;
 class MyWindow : public QWidget
 {
     Q_OBJECT
@@ -16,6 +18,8 @@ private:
     QIcon *m_iconMain;
     QSize *m_iconSize;
     QFont *m_fontCourier;
+    QSlider *m_slider;
+    QProgressBar *m_progressBar;
 
 signals:
 
