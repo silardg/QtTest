@@ -16,7 +16,21 @@ int main(int argc, char **argv) {
     window.setFixedSize(400,400);
 
 
-    QPushButton btn1("btn1", &window);
+    QBoxLayout layoutBox(QBoxLayout::LeftToRight, &window);
+
+    // buttons used for layoutBox
+    QPushButton btn0("btn0");
+    QPushButton btn1("btn1");
+    QPushButton btn2("btn2");
+
+    // inserting buttons and adding a spacing between
+    layoutBox.insertWidget(0, &btn0);
+    layoutBox.insertSpacing(1, 100);
+    layoutBox.insertWidget(2, &btn1);
+    layoutBox.insertWidget(3, &btn2);
+
+//    QWidget::connect(&btn0, SIGNAL (clicked(bool)), &layoutBox, SLOT ());
+
 
     // showing the window
     window.show();
