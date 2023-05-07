@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QMap>
+#include <QHBoxLayout>
 
 #include<QDebug>
 
@@ -38,12 +39,29 @@ addressBook::addressBook(QWidget *parent) : QWidget(parent)
     m_interactionBox->addWidget(m_buttonCancel);
     m_interactionBox->addStretch();
 
+
+    // labelSize is showing how many contacts we have and at what position we are at
+    // prev and next buttons are used for navigation
+    m_labelSize     = new QLabel("0/0");
+    m_buttonPrev    = new QPushButton("Previous");
+    m_buttonNext    = new QPushButton("Next");
+    m_buttonPrev->hide();
+    m_buttonNext->hide();
+//    m_labelSize->hide();
+    // create a horizontal box and add the buttons to it
+    m_navigationBox = new QHBoxLayout();
+    m_navigationBox->addWidget(m_buttonPrev);
+    m_navigationBox->addWidget(m_buttonNext);
+
     // adding the widgets and making sure it fits the design
     m_mainLayout->addWidget(m_labelName, 0, 0);
     m_mainLayout->addWidget(m_lineEditName, 0, 1);
     m_mainLayout->addWidget(m_labelAddress, 1, 0, Qt::AlignTop);
     m_mainLayout->addWidget(m_textEditAddress, 1, 1);
     m_mainLayout->addLayout(m_interactionBox, 1, 2);
+    m_mainLayout->addWidget(m_labelSize, 2,0);
+    m_mainLayout->addLayout(m_navigationBox, 2,1);
+
 
     // setup the signals from the buttons
     connect(m_buttonAdd, SIGNAL (clicked()), this, SLOT (actionAdd()));
@@ -89,16 +107,22 @@ void addressBook::actionSubmit() {
     QString addedAddress = m_textEditAddress->toPlainText();
 
     // both have to be with some data
-    if (addedName.isEmpty() || addedAddress.isEmpty())
+    if (addedName.isEmpty() || addedAddress.isEmpty()) {
+        qWarning("Something is missing");
         return;
-
+    }
     // checks if it is already part of the address book
-    if (!contacts->contains(addedName))
+    if (contacts->contains(addedName)) {
+        qWarning("Already in database");
         return;
+    }
 
     // if it is not part, add it
     contacts->insert(addedName, addedAddress);
-    qInfo("Added new");
+
+    // set the number of contacts available
+    m_labelSize->setText(QString::number(contacts->count()));
+    m_labelSize->show();
 
     // clear it
     actionCancel();

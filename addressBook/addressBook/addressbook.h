@@ -10,6 +10,7 @@ class QTextEdit;
 class QGridLayout;
 class QPushButton;
 class QVBoxLayout;
+class QHBoxLayout;
 class addressBook : public QWidget
 {
     Q_OBJECT
@@ -22,6 +23,7 @@ public slots:
 private:
     QLabel      *m_labelName;
     QLabel      *m_labelAddress;
+    QLabel      *m_labelSize;
     QLineEdit   *m_lineEditName;
     QTextEdit   *m_textEditAddress;
 
@@ -31,6 +33,10 @@ private:
     QPushButton *m_buttonSubmit;
     QPushButton *m_buttonCancel;
     QVBoxLayout *m_interactionBox;
+
+    QPushButton *m_buttonPrev;
+    QPushButton *m_buttonNext;
+    QHBoxLayout *m_navigationBox;
 
     QMap<QString, QString> *contacts;
 
