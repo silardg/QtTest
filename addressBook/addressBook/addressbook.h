@@ -32,6 +32,8 @@ private:
     QPushButton *m_buttonCancel;
     QVBoxLayout *m_interactionBox;
 
+    QMap<QString, QString> *contacts;
+
 };
 
 #endif // ADDRESSBOOK_H
