@@ -38,8 +38,6 @@ int main(int argc, char **argv) {
     layoutBox->insertWidget(2, &btn1);
     layoutBox->insertWidget(3, &btn2);
 
-//    QWidget::connect(&btn0, SIGNAL (clicked(bool)), &layoutBox, SLOT ());
-
     // ---------------------------------------------------------------------------------------
 
     QWidget window2(nullptr);
