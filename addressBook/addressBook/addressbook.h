@@ -20,10 +20,13 @@ public slots:
     void actionAdd();
     void actionSubmit();
     void actionCancel();
+    void actionNext();
+    void actionPrev();
 private:
     void printDatabase();
-    void setPositionLabel(int currentPosition);
-    void setInputFields(int currentPosition);
+    void setPositionLabel();
+    void setInputFields();
+    void updateNavigationButtons();
 
 private:
     QLabel      *m_labelName;
@@ -44,6 +47,8 @@ private:
     QHBoxLayout *m_navigationBox;
 
     QMap<QString, QString> *contacts;
+
+    int m_currentPosition = 0;
 
 };
 

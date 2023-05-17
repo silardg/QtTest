@@ -66,6 +66,8 @@ addressBook::addressBook(QWidget *parent) : QWidget(parent)
     connect(m_buttonAdd, SIGNAL (clicked()), this, SLOT (actionAdd()));
     connect(m_buttonSubmit, SIGNAL (clicked()), this, SLOT (actionSubmit()));
     connect(m_buttonCancel, SIGNAL (clicked()), this, SLOT (actionCancel()));
+    connect(m_buttonNext, SIGNAL (clicked()), this, SLOT (actionNext()));
+    connect(m_buttonPrev, SIGNAL (clicked()), this, SLOT (actionPrev()));
 
     // set this layout as the main
     setLayout(m_mainLayout);
@@ -119,13 +121,21 @@ void addressBook::actionSubmit() {
     // if it is not part, add it
     contacts->insert(addedName, addedAddress);
 
-    int contactsCurrentCount = contacts->count();
+    m_currentPosition = contacts->count();
 
-    setPositionLabel(contactsCurrentCount);
+    setPositionLabel();
 
     // if there is more than 1 contact in the database, add the navigation buttons
-    if (contactsCurrentCount > 1) {
+    if (m_currentPosition > 1) {
         // do navigation here
+        m_buttonPrev->show();
+        m_buttonNext->show();
+
+        updateNavigationButtons();
+    } else {
+        // remove the navigation buttons
+        m_buttonPrev->hide();
+        m_buttonNext->hide();
     }
 
     printDatabase();
@@ -150,11 +160,37 @@ void addressBook::actionCancel() {
 }
 
 /**
+ * @brief addressBook::actionNext
+ */
+void addressBook::actionNext() {
+    qInfo("Next action");
+
+    m_currentPosition++;
+
+    setInputFields();
+    setPositionLabel();
+    updateNavigationButtons();
+}
+
+/**
+ * @brief addressBook::actionPrev
+ */
+void addressBook::actionPrev() {
+    qInfo("Prev action");
+
+    m_currentPosition--;
+
+    setInputFields();
+    setPositionLabel();
+    updateNavigationButtons();
+}
+
+/**
  * @brief addressBook::printDatabase
  */
 void addressBook::printDatabase() {
     qInfo("-------------------------");
-    for (auto e : contacts->toStdMap()) {
+    for (const auto &e : contacts->toStdMap()) {
         qInfo() << e.first << " - " << e.second;
     }
     qInfo("-------------------------");
@@ -162,17 +198,35 @@ void addressBook::printDatabase() {
 
 /**
  * @brief addressBook::setPositionLabel
- * @param currentPosition
  */
-void addressBook::setPositionLabel(int currentPosition) {
+void addressBook::setPositionLabel() {
     // set the number of elements and the position
-    m_labelSize->setText(QString::number(currentPosition) + "/" +QString::number(contacts->count()));
+    m_labelSize->setText(QString::number(m_currentPosition) + "/" +QString::number(contacts->count()));
 }
 
 /**
  * @brief addressBook::setInputFields
- * @param currentPosition
  */
-void addressBook::setInputFields(int currentPosition) {
+void addressBook::setInputFields() {
 
+}
+
+/**
+ * @brief addressBook::updateNavigationButtons
+ */
+void addressBook::updateNavigationButtons() {
+
+//    qInfo() << m_currentPosition << "-" << contacts->count();
+
+    m_buttonNext->setDisabled(false);
+    m_buttonPrev->setDisabled(false);
+
+    // our position is at the end, disable the next button
+    if (m_currentPosition == contacts->count()) {
+        m_buttonNext->setDisabled(true);
+    }
+    // our position is at the start, disable the previous button
+    else if (m_currentPosition == 1) {
+        m_buttonPrev->setDisabled(true);
+    }
 }
