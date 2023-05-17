@@ -47,7 +47,6 @@ addressBook::addressBook(QWidget *parent) : QWidget(parent)
     m_buttonNext    = new QPushButton("Next");
     m_buttonPrev->hide();
     m_buttonNext->hide();
-//    m_labelSize->hide();
     // create a horizontal box and add the buttons to it
     m_navigationBox = new QHBoxLayout();
     m_navigationBox->addWidget(m_buttonPrev);
@@ -112,20 +111,24 @@ void addressBook::actionSubmit() {
         return;
     }
     // checks if it is already part of the address book
+    // in this case we will just modify it
     if (contacts->contains(addedName)) {
-        qWarning("Already in database");
-        return;
+        qWarning("Already in database, updating");
     }
 
     // if it is not part, add it
     contacts->insert(addedName, addedAddress);
 
-    // set the number of contacts available
-    m_labelSize->setText(QString::number(contacts->count()));
-    m_labelSize->show();
+    int contactsCurrentCount = contacts->count();
 
-    // clear it
-    actionCancel();
+    setPositionLabel(contactsCurrentCount);
+
+    // if there is more than 1 contact in the database, add the navigation buttons
+    if (contactsCurrentCount > 1) {
+        // do navigation here
+    }
+
+    printDatabase();
 }
 
 /**
@@ -144,4 +147,32 @@ void addressBook::actionCancel() {
     m_textEditAddress->clear();
 
     m_buttonAdd->show();
+}
+
+/**
+ * @brief addressBook::printDatabase
+ */
+void addressBook::printDatabase() {
+    qInfo("-------------------------");
+    for (auto e : contacts->toStdMap()) {
+        qInfo() << e.first << " - " << e.second;
+    }
+    qInfo("-------------------------");
+}
+
+/**
+ * @brief addressBook::setPositionLabel
+ * @param currentPosition
+ */
+void addressBook::setPositionLabel(int currentPosition) {
+    // set the number of elements and the position
+    m_labelSize->setText(QString::number(currentPosition) + "/" +QString::number(contacts->count()));
+}
+
+/**
+ * @brief addressBook::setInputFields
+ * @param currentPosition
+ */
+void addressBook::setInputFields(int currentPosition) {
+
 }

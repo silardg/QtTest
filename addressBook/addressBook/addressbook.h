@@ -21,6 +21,11 @@ public slots:
     void actionSubmit();
     void actionCancel();
 private:
+    void printDatabase();
+    void setPositionLabel(int currentPosition);
+    void setInputFields(int currentPosition);
+
+private:
     QLabel      *m_labelName;
     QLabel      *m_labelAddress;
     QLabel      *m_labelSize;
