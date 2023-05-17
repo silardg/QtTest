@@ -12,10 +12,8 @@
 
 #include <QDebug>
 
-addressBook::addressBook(QWidget *parent) : QWidget(parent)
-{
-//    contacts = new QMap<QString, QString>;
-    m_contacts = new QVector<contact>;
+addressBook::addressBook(QWidget *parent) : QWidget(parent) {
+    m_contacts = QVector<contact>();
 
     // input labels and fields
     m_labelName        = new QLabel("Name");
@@ -36,11 +34,13 @@ addressBook::addressBook(QWidget *parent) : QWidget(parent)
     m_buttonSubmit->hide();
     m_buttonCancel      = new QPushButton("Cancel");
     m_buttonCancel->hide();
+    m_buttonDelete      = new QPushButton("Delete");
+    m_buttonDelete->hide();
     m_interactionBox->addWidget(m_buttonAdd, Qt::AlignTop);
     m_interactionBox->addWidget(m_buttonSubmit);
+    m_interactionBox->addWidget(m_buttonDelete);
     m_interactionBox->addWidget(m_buttonCancel);
     m_interactionBox->addStretch();
-
 
     // labelSize is showing how many contacts we have and at what position we are at
     // prev and next buttons are used for navigation
@@ -67,6 +67,7 @@ addressBook::addressBook(QWidget *parent) : QWidget(parent)
     // setup the signals from the buttons
     connect(m_buttonAdd, SIGNAL (clicked()), this, SLOT (actionAdd()));
     connect(m_buttonSubmit, SIGNAL (clicked()), this, SLOT (actionSubmit()));
+    connect(m_buttonDelete, SIGNAL (clicked()), this, SLOT (actionDelete()));
     connect(m_buttonCancel, SIGNAL (clicked()), this, SLOT (actionCancel()));
     connect(m_buttonNext, SIGNAL (clicked()), this, SLOT (actionNext()));
     connect(m_buttonPrev, SIGNAL (clicked()), this, SLOT (actionPrev()));
@@ -90,6 +91,7 @@ void addressBook::actionAdd() {
 
     // shows the submit and cancel buttons
     m_buttonSubmit->show();
+    m_buttonDelete->show();
     m_buttonCancel->show();
 
     // clears the name and address fields
@@ -114,22 +116,26 @@ void addressBook::actionSubmit() {
         qWarning("Something is missing");
         return;
     }
-    // checks if it is already part of the address book
-    // in this case we will just modify it
-//    if (contacts->contains(addedName)) {
-//        qWarning("Already in database, updating");
-//    }
 
-//    // if it is not part, add it
-//    contacts->insert(addedName, addedAddress);
+    if (m_contacts.size() > 0) {
+        contact currentContactOnPosition = m_contacts.at(m_currentPosition - 1);
 
-//    m_currentPosition = contacts->count();
+        if (addedName == currentContactOnPosition.name) {
+            contact *contacts = m_contacts.data();
+            contacts[m_currentPosition - 1] = {addedName, addedAddress};
+        }
+        else {
+            m_contacts.append({addedName, addedAddress});
 
-    m_contacts->append({addedName, addedAddress});
+            m_currentPosition = m_contacts.size();
+        }
+    }
+    // if it is not, add new
+    else {
+        m_contacts.append({addedName, addedAddress});
 
-    qInfo() << m_contacts->size();
-
-    m_currentPosition = m_contacts->size();
+        m_currentPosition = m_contacts.size();
+    }
 
     setPositionLabel();
 
@@ -165,6 +171,14 @@ void addressBook::actionCancel() {
 }
 
 /**
+ * @brief addressBook::actionDelete
+ */
+void addressBook::actionDelete() {
+    qInfo() << m_currentPosition;
+
+}
+
+/**
  * @brief addressBook::actionNext
  */
 void addressBook::actionNext() {
@@ -195,7 +209,7 @@ void addressBook::actionPrev() {
  */
 void addressBook::printDatabase() {
     qInfo("-------------------------");
-    QVectorIterator<contact> i(*m_contacts);
+    QVectorIterator<contact> i(m_contacts);
 
     while(i.hasNext()) {
         contact c = i.next();
@@ -209,16 +223,14 @@ void addressBook::printDatabase() {
  */
 void addressBook::setPositionLabel() {
     // set the number of elements and the position
-    m_labelSize->setText(QString::number(m_currentPosition) + "/" +QString::number(m_contacts->size()));
+    m_labelSize->setText(QString::number(m_currentPosition) + "/" +QString::number(m_contacts.size()));
 }
 
 /**
  * @brief addressBook::setInputFields
  */
 void addressBook::setInputFields() {
-    const contact current = m_contacts->at(m_currentPosition - 1);
-
-//    qInfo() << "Setting to " << current.name << " - " << current.address;
+    const contact current = m_contacts.at(m_currentPosition - 1);
 
     m_lineEditName->setText(current.name);
     m_textEditAddress->setText(current.address);
@@ -229,13 +241,11 @@ void addressBook::setInputFields() {
  */
 void addressBook::updateNavigationButtons() {
 
-//    qInfo() << m_currentPosition << "-" << contacts->count();
-
     m_buttonNext->setDisabled(false);
     m_buttonPrev->setDisabled(false);
 
     // our position is at the end, disable the next button
-    if (m_currentPosition == m_contacts->size()) {
+    if (m_currentPosition == m_contacts.size()) {
         m_buttonNext->setDisabled(true);
     }
     // our position is at the start, disable the previous button

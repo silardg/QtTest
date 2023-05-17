@@ -42,20 +42,22 @@ static constexpr auto qt_meta_stringdata_CLASSaddressBookENDCLASS = QtMocHelpers
     "actionAdd",
     "",
     "actionSubmit",
+    "actionDelete",
     "actionCancel",
     "actionNext",
     "actionPrev"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSaddressBookENDCLASS_t {
-    uint offsetsAndSizes[14];
+    uint offsetsAndSizes[16];
     char stringdata0[12];
     char stringdata1[10];
     char stringdata2[1];
     char stringdata3[13];
     char stringdata4[13];
-    char stringdata5[11];
+    char stringdata5[13];
     char stringdata6[11];
+    char stringdata7[11];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSaddressBookENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -65,14 +67,16 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSaddressBookENDCLASS_t qt_meta_s
         QT_MOC_LITERAL(12, 9),  // "actionAdd"
         QT_MOC_LITERAL(22, 0),  // ""
         QT_MOC_LITERAL(23, 12),  // "actionSubmit"
-        QT_MOC_LITERAL(36, 12),  // "actionCancel"
-        QT_MOC_LITERAL(49, 10),  // "actionNext"
-        QT_MOC_LITERAL(60, 10)   // "actionPrev"
+        QT_MOC_LITERAL(36, 12),  // "actionDelete"
+        QT_MOC_LITERAL(49, 12),  // "actionCancel"
+        QT_MOC_LITERAL(62, 10),  // "actionNext"
+        QT_MOC_LITERAL(73, 10)   // "actionPrev"
     },
     "addressBook",
     "actionAdd",
     "",
     "actionSubmit",
+    "actionDelete",
     "actionCancel",
     "actionNext",
     "actionPrev"
@@ -87,7 +91,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSaddressBookENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -95,13 +99,15 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSaddressBookENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   44,    2, 0x0a,    1 /* Public */,
-       3,    0,   45,    2, 0x0a,    2 /* Public */,
-       4,    0,   46,    2, 0x0a,    3 /* Public */,
-       5,    0,   47,    2, 0x0a,    4 /* Public */,
-       6,    0,   48,    2, 0x0a,    5 /* Public */,
+       1,    0,   50,    2, 0x0a,    1 /* Public */,
+       3,    0,   51,    2, 0x0a,    2 /* Public */,
+       4,    0,   52,    2, 0x0a,    3 /* Public */,
+       5,    0,   53,    2, 0x0a,    4 /* Public */,
+       6,    0,   54,    2, 0x0a,    5 /* Public */,
+       7,    0,   55,    2, 0x0a,    6 /* Public */,
 
  // slots: parameters
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -124,6 +130,8 @@ Q_CONSTINIT const QMetaObject addressBook::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'actionSubmit'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'actionDelete'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'actionCancel'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'actionNext'
@@ -142,9 +150,10 @@ void addressBook::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         switch (_id) {
         case 0: _t->actionAdd(); break;
         case 1: _t->actionSubmit(); break;
-        case 2: _t->actionCancel(); break;
-        case 3: _t->actionNext(); break;
-        case 4: _t->actionPrev(); break;
+        case 2: _t->actionDelete(); break;
+        case 3: _t->actionCancel(); break;
+        case 4: _t->actionNext(); break;
+        case 5: _t->actionPrev(); break;
         default: ;
         }
     }
@@ -170,13 +179,13 @@ int addressBook::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 6)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }

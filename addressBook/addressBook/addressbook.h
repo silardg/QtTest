@@ -20,6 +20,7 @@ public:
 public slots:
     void actionAdd();
     void actionSubmit();
+    void actionDelete();
     void actionCancel();
     void actionNext();
     void actionPrev();
@@ -47,13 +48,14 @@ private:
     QPushButton *m_buttonAdd;
     QPushButton *m_buttonSubmit;
     QPushButton *m_buttonCancel;
+    QPushButton *m_buttonDelete;
     QVBoxLayout *m_interactionBox;
 
     QPushButton *m_buttonPrev;
     QPushButton *m_buttonNext;
     QHBoxLayout *m_navigationBox;
 
-    QVector<contact> *m_contacts;
+    QVector<contact> m_contacts;
 
 
     int m_currentPosition = 0;
