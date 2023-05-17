@@ -32,14 +32,11 @@ addressBook::addressBook(QWidget *parent) : QWidget(parent) {
     m_buttonAdd         = new QPushButton("Add");
     m_buttonSubmit      = new QPushButton("Submit");
     m_buttonSubmit->hide();
-    m_buttonCancel      = new QPushButton("Cancel");
-    m_buttonCancel->hide();
     m_buttonDelete      = new QPushButton("Delete");
     m_buttonDelete->hide();
     m_interactionBox->addWidget(m_buttonAdd, Qt::AlignTop);
     m_interactionBox->addWidget(m_buttonSubmit);
     m_interactionBox->addWidget(m_buttonDelete);
-    m_interactionBox->addWidget(m_buttonCancel);
     m_interactionBox->addStretch();
 
     // labelSize is showing how many contacts we have and at what position we are at
@@ -68,7 +65,6 @@ addressBook::addressBook(QWidget *parent) : QWidget(parent) {
     connect(m_buttonAdd, SIGNAL (clicked()), this, SLOT (actionAdd()));
     connect(m_buttonSubmit, SIGNAL (clicked()), this, SLOT (actionSubmit()));
     connect(m_buttonDelete, SIGNAL (clicked()), this, SLOT (actionDelete()));
-    connect(m_buttonCancel, SIGNAL (clicked()), this, SLOT (actionCancel()));
     connect(m_buttonNext, SIGNAL (clicked()), this, SLOT (actionNext()));
     connect(m_buttonPrev, SIGNAL (clicked()), this, SLOT (actionPrev()));
 
@@ -83,7 +79,6 @@ addressBook::addressBook(QWidget *parent) : QWidget(parent) {
  * @brief addressBook::actionAdd
  */
 void addressBook::actionAdd() {
-    qInfo("Add");
 
     // sets the name and address fields to be able to get written
     m_lineEditName->setEnabled(true);
@@ -92,11 +87,8 @@ void addressBook::actionAdd() {
     // shows the submit and cancel buttons
     m_buttonSubmit->show();
     m_buttonDelete->show();
-    m_buttonCancel->show();
 
     // clears the name and address fields
-    m_lineEditName->clear();
-    m_textEditAddress->clear();
 
     m_buttonAdd->hide();
 }
@@ -105,7 +97,6 @@ void addressBook::actionAdd() {
  * @brief addressBook::actionSubmit
  */
 void addressBook::actionSubmit() {
-    qInfo("Submit");
 
     // get the name and address
     QString addedName = m_lineEditName->text();
@@ -153,28 +144,34 @@ void addressBook::actionSubmit() {
     }
 
     printDatabase();
-}
 
-/**
- * @brief addressBook::actionCancel
- */
-void addressBook::actionCancel() {
-
-    m_buttonSubmit->hide();
-    m_buttonCancel->hide();
-
-    // clears the name and address fields
-    m_lineEditName->clear();
-    m_textEditAddress->clear();
-
-    m_buttonAdd->show();
+    m_buttonDelete->show();
 }
 
 /**
  * @brief addressBook::actionDelete
  */
 void addressBook::actionDelete() {
-    qInfo() << m_currentPosition;
+
+    if (m_contacts.size() > 0) {
+        m_contacts.remove(m_currentPosition - 1);
+    }
+
+    m_currentPosition = 1;
+
+    if (m_contacts.size() == 0) {
+        m_lineEditName->clear();
+        m_textEditAddress->clear();
+        setPositionLabel();
+        m_buttonDelete->hide();
+        return;
+    }
+
+    setInputFields();
+    setPositionLabel();
+    updateNavigationButtons();
+
+    printDatabase();
 
 }
 
@@ -182,7 +179,6 @@ void addressBook::actionDelete() {
  * @brief addressBook::actionNext
  */
 void addressBook::actionNext() {
-    qInfo("Next action");
 
     m_currentPosition++;
 
@@ -195,7 +191,6 @@ void addressBook::actionNext() {
  * @brief addressBook::actionPrev
  */
 void addressBook::actionPrev() {
-    qInfo("Prev action");
 
     m_currentPosition--;
 
@@ -251,5 +246,10 @@ void addressBook::updateNavigationButtons() {
     // our position is at the start, disable the previous button
     else if (m_currentPosition == 1) {
         m_buttonPrev->setDisabled(true);
+    }
+
+    if(m_currentPosition == 1 && m_contacts.size() == 1) {
+        m_buttonNext->hide();
+        m_buttonPrev->hide();
     }
 }

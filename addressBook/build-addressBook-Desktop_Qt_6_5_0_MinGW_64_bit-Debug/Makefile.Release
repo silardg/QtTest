@@ -109,10 +109,12 @@ compiler_moc_header_make_all: release/moc_addressbook.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) release\moc_addressbook.cpp
 release/moc_addressbook.cpp: ../addressBook/addressbook.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/QObject \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobject.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobjectdefs.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qnamespace.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qvector.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qlist.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qarraydatapointer.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qarraydataops.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qarraydata.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qpair.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qglobal.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qtversionchecks.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qconfig.h \
@@ -155,19 +157,16 @@ release/moc_addressbook.cpp: ../addressBook/addressbook.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qtresource.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qttranslation.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qversiontagging.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qcontainertools_impl.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qxptype_traits.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qnamespace.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qtmetamacros.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qhashfunctions.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstring.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qchar.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstringview.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qbytearray.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qrefcount.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qarraydata.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qpair.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qarraydatapointer.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qarraydataops.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qcontainertools_impl.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qxptype_traits.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qbytearrayalgorithms.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qbytearrayview.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstringfwd.h \
@@ -178,13 +177,15 @@ release/moc_addressbook.cpp: ../addressBook/addressbook.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qutf8stringview.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstringtokenizer.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstringbuilder.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qlist.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qhashfunctions.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qiterator.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qbytearraylist.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstringlist.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qalgorithms.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstringmatcher.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/QObject \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobject.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobjectdefs.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobjectdefs_impl.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qcoreevent.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qscopedpointer.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qmetatype.h \
@@ -289,10 +290,12 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 ####### Compile
 
 release/addressbook.o: ../addressBook/addressbook.cpp ../addressBook/addressbook.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/QObject \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobject.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobjectdefs.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qnamespace.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qvector.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qlist.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qarraydatapointer.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qarraydataops.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qarraydata.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qpair.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qglobal.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qtversionchecks.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qconfig.h \
@@ -335,19 +338,16 @@ release/addressbook.o: ../addressBook/addressbook.cpp ../addressBook/addressbook
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qtresource.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qttranslation.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qversiontagging.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qcontainertools_impl.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qxptype_traits.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qnamespace.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qtmetamacros.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qhashfunctions.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstring.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qchar.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstringview.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qbytearray.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qrefcount.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qarraydata.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qpair.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qarraydatapointer.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qarraydataops.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qcontainertools_impl.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qxptype_traits.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qbytearrayalgorithms.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qbytearrayview.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstringfwd.h \
@@ -358,13 +358,15 @@ release/addressbook.o: ../addressBook/addressbook.cpp ../addressBook/addressbook
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qutf8stringview.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstringtokenizer.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstringbuilder.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qlist.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qhashfunctions.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qiterator.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qbytearraylist.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstringlist.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qalgorithms.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstringmatcher.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/QObject \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobject.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobjectdefs.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobjectdefs_impl.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qcoreevent.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qscopedpointer.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qmetatype.h \
@@ -471,6 +473,7 @@ release/addressbook.o: ../addressBook/addressbook.cpp ../addressBook/addressbook
 		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QVBoxLayout \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/QMap \
 		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QHBoxLayout \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/QMutableVectorIterator \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\addressbook.o ..\addressBook\addressbook.cpp
 
@@ -628,6 +631,7 @@ release/main.o: ../addressBook/main.cpp ../../../../Qt/6.5.0/mingw_64/include/Qt
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qlocale.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qguiapplication_platform.h \
 		../addressBook/addressbook.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qvector.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/QObject \
 		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QWidget \
 		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qwidget.h \

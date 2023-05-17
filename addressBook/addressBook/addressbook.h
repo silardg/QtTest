@@ -21,7 +21,7 @@ public slots:
     void actionAdd();
     void actionSubmit();
     void actionDelete();
-    void actionCancel();
+//    void actionCancel();
     void actionNext();
     void actionPrev();
 private:
