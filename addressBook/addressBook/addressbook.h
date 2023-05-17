@@ -1,6 +1,7 @@
 #ifndef ADDRESSBOOK_H
 #define ADDRESSBOOK_H
 
+#include "qvector.h"
 #include <QObject>
 #include <QWidget>
 
@@ -29,6 +30,12 @@ private:
     void updateNavigationButtons();
 
 private:
+
+    struct contact {
+        QString name;
+        QString address;
+    };
+
     QLabel      *m_labelName;
     QLabel      *m_labelAddress;
     QLabel      *m_labelSize;
@@ -46,7 +53,8 @@ private:
     QPushButton *m_buttonNext;
     QHBoxLayout *m_navigationBox;
 
-    QMap<QString, QString> *contacts;
+    QVector<contact> *m_contacts;
+
 
     int m_currentPosition = 0;
 

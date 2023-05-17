@@ -8,12 +8,14 @@
 #include <QVBoxLayout>
 #include <QMap>
 #include <QHBoxLayout>
+#include <QMutableVectorIterator>
 
-#include<QDebug>
+#include <QDebug>
 
 addressBook::addressBook(QWidget *parent) : QWidget(parent)
 {
-    contacts = new QMap<QString, QString>;
+//    contacts = new QMap<QString, QString>;
+    m_contacts = new QVector<contact>;
 
     // input labels and fields
     m_labelName        = new QLabel("Name");
@@ -114,14 +116,20 @@ void addressBook::actionSubmit() {
     }
     // checks if it is already part of the address book
     // in this case we will just modify it
-    if (contacts->contains(addedName)) {
-        qWarning("Already in database, updating");
-    }
+//    if (contacts->contains(addedName)) {
+//        qWarning("Already in database, updating");
+//    }
 
-    // if it is not part, add it
-    contacts->insert(addedName, addedAddress);
+//    // if it is not part, add it
+//    contacts->insert(addedName, addedAddress);
 
-    m_currentPosition = contacts->count();
+//    m_currentPosition = contacts->count();
+
+    m_contacts->append({addedName, addedAddress});
+
+    qInfo() << m_contacts->size();
+
+    m_currentPosition = m_contacts->size();
 
     setPositionLabel();
 
@@ -145,9 +153,6 @@ void addressBook::actionSubmit() {
  * @brief addressBook::actionCancel
  */
 void addressBook::actionCancel() {
-
-    m_lineEditName->setEnabled(false);
-    m_textEditAddress->setEnabled(false);
 
     m_buttonSubmit->hide();
     m_buttonCancel->hide();
@@ -190,8 +195,11 @@ void addressBook::actionPrev() {
  */
 void addressBook::printDatabase() {
     qInfo("-------------------------");
-    for (const auto &e : contacts->toStdMap()) {
-        qInfo() << e.first << " - " << e.second;
+    QVectorIterator<contact> i(*m_contacts);
+
+    while(i.hasNext()) {
+        contact c = i.next();
+        qInfo() << c.name << " - " << c.address;
     }
     qInfo("-------------------------");
 }
@@ -201,14 +209,19 @@ void addressBook::printDatabase() {
  */
 void addressBook::setPositionLabel() {
     // set the number of elements and the position
-    m_labelSize->setText(QString::number(m_currentPosition) + "/" +QString::number(contacts->count()));
+    m_labelSize->setText(QString::number(m_currentPosition) + "/" +QString::number(m_contacts->size()));
 }
 
 /**
  * @brief addressBook::setInputFields
  */
 void addressBook::setInputFields() {
+    const contact current = m_contacts->at(m_currentPosition - 1);
 
+//    qInfo() << "Setting to " << current.name << " - " << current.address;
+
+    m_lineEditName->setText(current.name);
+    m_textEditAddress->setText(current.address);
 }
 
 /**
@@ -222,7 +235,7 @@ void addressBook::updateNavigationButtons() {
     m_buttonPrev->setDisabled(false);
 
     // our position is at the end, disable the next button
-    if (m_currentPosition == contacts->count()) {
+    if (m_currentPosition == m_contacts->size()) {
         m_buttonNext->setDisabled(true);
     }
     // our position is at the start, disable the previous button
