@@ -13,6 +13,7 @@
 #include <QDebug>
 
 addressBook::addressBook(QWidget *parent) : QWidget(parent) {
+    // initialize vector
     m_contacts = QVector<contact>();
 
     // input labels and fields
@@ -60,7 +61,6 @@ addressBook::addressBook(QWidget *parent) : QWidget(parent) {
     m_mainLayout->addWidget(m_labelSize, 2,0);
     m_mainLayout->addLayout(m_navigationBox, 2,1);
 
-
     // setup the signals from the buttons
     connect(m_buttonAdd, SIGNAL (clicked()), this, SLOT (actionAdd()));
     connect(m_buttonSubmit, SIGNAL (clicked()), this, SLOT (actionSubmit()));
@@ -79,7 +79,6 @@ addressBook::addressBook(QWidget *parent) : QWidget(parent) {
  * @brief addressBook::actionAdd
  */
 void addressBook::actionAdd() {
-
     // sets the name and address fields to be able to get written
     m_lineEditName->setEnabled(true);
     m_textEditAddress->setEnabled(true);
@@ -88,8 +87,7 @@ void addressBook::actionAdd() {
     m_buttonSubmit->show();
     m_buttonDelete->show();
 
-    // clears the name and address fields
-
+    // hides the add button
     m_buttonAdd->hide();
 }
 
@@ -97,10 +95,13 @@ void addressBook::actionAdd() {
  * @brief addressBook::actionSubmit
  */
 void addressBook::actionSubmit() {
-
     // get the name and address
     QString addedName = m_lineEditName->text();
     QString addedAddress = m_textEditAddress->toPlainText();
+
+    // as it was submited, it can be deleted
+    // showing the delete button
+    m_buttonDelete->show();
 
     // both have to be with some data
     if (addedName.isEmpty() || addedAddress.isEmpty()) {
@@ -108,27 +109,36 @@ void addressBook::actionSubmit() {
         return;
     }
 
+    // if the contact size is more than 0
+    // this has to be checked so that the .at function doesnt crash
     if (m_contacts.size() > 0) {
+        // get the current positions data
         contact currentContactOnPosition = m_contacts.at(m_currentPosition - 1);
 
+        // check if the current positions name is the same as the fields
         if (addedName == currentContactOnPosition.name) {
+            // this means that we will modify the value
+            // we get the data and modify the positions data
             contact *contacts = m_contacts.data();
             contacts[m_currentPosition - 1] = {addedName, addedAddress};
         }
+        // in case that it is new data, we just append it
         else {
+            // adding data
             m_contacts.append({addedName, addedAddress});
 
+            // setting the position to the last
             m_currentPosition = m_contacts.size();
         }
     }
-    // if it is not, add new
+    // in case that it is new data, we just append it
     else {
+        // adding data
         m_contacts.append({addedName, addedAddress});
 
+        // setting the position to the last
         m_currentPosition = m_contacts.size();
     }
-
-    setPositionLabel();
 
     // if there is more than 1 contact in the database, add the navigation buttons
     if (m_currentPosition > 1) {
@@ -136,6 +146,7 @@ void addressBook::actionSubmit() {
         m_buttonPrev->show();
         m_buttonNext->show();
 
+        // update the state of the buttons
         updateNavigationButtons();
     } else {
         // remove the navigation buttons
@@ -143,33 +154,39 @@ void addressBook::actionSubmit() {
         m_buttonNext->hide();
     }
 
-    printDatabase();
+    // set the position label updated with the amount of data
+    setPositionLabel();
 
-    m_buttonDelete->show();
+    printDatabase();
 }
 
 /**
  * @brief addressBook::actionDelete
  */
 void addressBook::actionDelete() {
-
+    // in case there is more than 1 in the database, remove it
     if (m_contacts.size() > 0) {
         m_contacts.remove(m_currentPosition - 1);
     }
 
+    // after deleting always go to the first element
     m_currentPosition = 1;
 
+    // if the size is 0, thus no records, go back to default mode
     if (m_contacts.size() == 0) {
+        // clear the inputs
         m_lineEditName->clear();
         m_textEditAddress->clear();
+
+        // update the position label
         setPositionLabel();
+
+        // hide the delete button
         m_buttonDelete->hide();
         return;
     }
 
-    setInputFields();
-    setPositionLabel();
-    updateNavigationButtons();
+    updateInterface();
 
     printDatabase();
 
@@ -179,21 +196,27 @@ void addressBook::actionDelete() {
  * @brief addressBook::actionNext
  */
 void addressBook::actionNext() {
-
+    // increment the position
     m_currentPosition++;
 
-    setInputFields();
-    setPositionLabel();
-    updateNavigationButtons();
+
+    updateInterface();
 }
 
 /**
  * @brief addressBook::actionPrev
  */
 void addressBook::actionPrev() {
-
+    // decrement the position
     m_currentPosition--;
 
+    updateInterface();
+}
+
+/**
+ * @brief addressBook::updateInterface
+ */
+void addressBook::updateInterface() {
     setInputFields();
     setPositionLabel();
     updateNavigationButtons();
@@ -225,8 +248,10 @@ void addressBook::setPositionLabel() {
  * @brief addressBook::setInputFields
  */
 void addressBook::setInputFields() {
+    // get the current contact data
     const contact current = m_contacts.at(m_currentPosition - 1);
 
+    // show it in the input fields
     m_lineEditName->setText(current.name);
     m_textEditAddress->setText(current.address);
 }
@@ -235,7 +260,7 @@ void addressBook::setInputFields() {
  * @brief addressBook::updateNavigationButtons
  */
 void addressBook::updateNavigationButtons() {
-
+    // set them to not be disabled by default
     m_buttonNext->setDisabled(false);
     m_buttonPrev->setDisabled(false);
 
@@ -248,6 +273,7 @@ void addressBook::updateNavigationButtons() {
         m_buttonPrev->setDisabled(true);
     }
 
+    // in case that we are in the first position and that the contact size is 1, we don't need the buttons
     if(m_currentPosition == 1 && m_contacts.size() == 1) {
         m_buttonNext->hide();
         m_buttonPrev->hide();

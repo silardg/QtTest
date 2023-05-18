@@ -26,10 +26,10 @@ public slots:
     void actionPrev();
 private:
     void printDatabase();
-    void setPositionLabel();
-    void setInputFields();
-    void updateNavigationButtons();
-
+    inline void setPositionLabel();
+    inline void setInputFields();
+    inline void updateNavigationButtons();
+    inline void updateInterface();
 private:
 
     struct contact {
