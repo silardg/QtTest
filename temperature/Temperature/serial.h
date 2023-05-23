@@ -16,6 +16,7 @@ public:
     bool open();
     void close();
     QVector<QString> get_ports();
+    void set_selectedPort(QString port);
 private:
     // store the serial object
     QSerialPort *m_serial = nullptr;
