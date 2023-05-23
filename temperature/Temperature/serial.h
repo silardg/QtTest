@@ -3,13 +3,14 @@
 
 #include <QSerialPort>
 #include <QSerialPortInfo>
+#include <QWidget>
 
 #include <QVector>
 
-class serial
+class serial : public QWidget
 {
 public:
-    serial(QSerialPort *port);
+    serial(QSerialPort *port = nullptr, QWidget *parent = nullptr);
     ~serial();
 
     bool open();
@@ -28,6 +29,9 @@ private:
     QSerialPort::StopBits m_config_stopbit = QSerialPort::OneStop;
     QSerialPort::FlowControl m_config_flow = QSerialPort::NoFlowControl;
     QIODevice::OpenModeFlag m_config_openMode = QIODevice::ReadWrite;
+
+private slots:
+    void event_error(QSerialPort::SerialPortError error);
 
 };
 

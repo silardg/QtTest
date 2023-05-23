@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    qInfo() << "Destroy main window";
     delete ui;
     delete m_serial;
 }

@@ -6,8 +6,11 @@
  * @brief serial::serial
  * @param port
  */
-serial::serial(QSerialPort *port) {
+serial::serial(QSerialPort *port, QWidget *parent) : QWidget(parent) {
     m_serial = port;
+
+    // connecting the error signal to the event error function
+    connect(m_serial, SIGNAL (errorOccured()), this, SLOT (event_error()));
 
     const auto serialPortInfos = QSerialPortInfo::availablePorts();
     qDebug() << serialPortInfos.size();
@@ -68,6 +71,16 @@ void serial::close() {
         m_serial->close();
 
     qInfo() <<  "Closed port at " <<  m_port_chosen.portName();
+}
+
+/**
+ * @brief event_error
+ * @param error
+ */
+void serial::event_error(QSerialPort::SerialPortError error) {
+    // TODO extend this a bit
+    qInfo() << "Error in the serial communication";
+    close();
 }
 
 //void serial::readAll() {
