@@ -113,10 +113,10 @@ compiler_moc_header_make_all: debug/moc_mainwindow.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) debug\moc_mainwindow.cpp
 debug/moc_mainwindow.cpp: ../Temperature/mainwindow.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QMainWindow \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qmainwindow.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtguiglobal.h \
+		../Temperature/serial.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/QSerialPort \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/qserialport.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qiodevice.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qglobal.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qtversionchecks.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qconfig.h \
@@ -159,18 +159,12 @@ debug/moc_mainwindow.cpp: ../Temperature/mainwindow.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qtresource.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qttranslation.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qversiontagging.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtgui-config.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtguiexports.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgets-config.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgetsexports.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qwidget.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qwindowdefs.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qiodevicebase.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobject.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobjectdefs.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qnamespace.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qtmetamacros.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobjectdefs_impl.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qwindowdefs_win.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobject.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstring.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qchar.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstringview.h \
@@ -204,7 +198,6 @@ debug/moc_mainwindow.cpp: ../Temperature/mainwindow.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qmetatype.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qcompare.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qdatastream.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qiodevicebase.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qfloat16.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qmath.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qiterable.h \
@@ -214,6 +207,20 @@ debug/moc_mainwindow.cpp: ../Temperature/mainwindow.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qbindingstorage.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/qserialportglobal.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/qtserialportexports.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/QSerialPortInfo \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/qserialportinfo.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QWidget \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qwidget.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtguiglobal.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtgui-config.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtguiexports.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgets-config.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgetsexports.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qwindowdefs.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qwindowdefs_win.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qmargins.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qaction.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qkeysequence.h \
@@ -255,7 +262,6 @@ debug/moc_mainwindow.cpp: ../Temperature/mainwindow.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qcursor.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qbitmap.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qevent.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qiodevice.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qpointer.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qurl.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qeventpoint.h \
@@ -271,7 +277,30 @@ debug/moc_mainwindow.cpp: ../Temperature/mainwindow.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/QSizeF \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/QTransform \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qnativeinterface.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/QVector \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qvector.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QListWidgetItem \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qlistwidget.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qlistview.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qabstractitemview.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qframe.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qabstractitemmodel.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qstyleoption.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qlocale.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qabstractspinbox.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qvalidator.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qregularexpression.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qslider.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qabstractslider.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qstyle.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtabbar.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtabwidget.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qrubberband.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QMainWindow \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qmainwindow.h \
 		debug/moc_predefs.h \
 		../../../../Qt/6.5.0/mingw_64/bin/moc.exe
 	C:\Qt\6.5.0\mingw_64\bin\moc.exe $(DEFINES) --include C:/git/QtTest/temperature/build-Temperature-Desktop_Qt_6_5_0_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/6.5.0/mingw_64/mkspecs/win32-g++ -IC:/git/QtTest/temperature/Temperature -IC:/Qt/6.5.0/mingw_64/include -IC:/Qt/6.5.0/mingw_64/include/QtWidgets -IC:/Qt/6.5.0/mingw_64/include/QtGui -IC:/Qt/6.5.0/mingw_64/include/QtSerialPort -IC:/Qt/6.5.0/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\Temperature\mainwindow.h -o debug\moc_mainwindow.cpp
@@ -300,10 +329,10 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 ####### Compile
 
 debug/main.o: ../Temperature/main.cpp ../Temperature/mainwindow.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QMainWindow \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qmainwindow.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtguiglobal.h \
+		../Temperature/serial.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/QSerialPort \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/qserialport.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qiodevice.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qglobal.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qtversionchecks.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qconfig.h \
@@ -346,18 +375,12 @@ debug/main.o: ../Temperature/main.cpp ../Temperature/mainwindow.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qtresource.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qttranslation.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qversiontagging.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtgui-config.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtguiexports.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgets-config.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgetsexports.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qwidget.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qwindowdefs.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qiodevicebase.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobject.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobjectdefs.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qnamespace.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qtmetamacros.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobjectdefs_impl.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qwindowdefs_win.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobject.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstring.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qchar.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstringview.h \
@@ -391,7 +414,6 @@ debug/main.o: ../Temperature/main.cpp ../Temperature/mainwindow.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qmetatype.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qcompare.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qdatastream.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qiodevicebase.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qfloat16.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qmath.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qiterable.h \
@@ -401,6 +423,20 @@ debug/main.o: ../Temperature/main.cpp ../Temperature/mainwindow.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qbindingstorage.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/qserialportglobal.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/qtserialportexports.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/QSerialPortInfo \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/qserialportinfo.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QWidget \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qwidget.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtguiglobal.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtgui-config.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtguiexports.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgets-config.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgetsexports.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qwindowdefs.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qwindowdefs_win.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qmargins.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qaction.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qkeysequence.h \
@@ -442,7 +478,6 @@ debug/main.o: ../Temperature/main.cpp ../Temperature/mainwindow.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qcursor.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qbitmap.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qevent.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qiodevice.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qpointer.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qurl.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qeventpoint.h \
@@ -458,7 +493,30 @@ debug/main.o: ../Temperature/main.cpp ../Temperature/mainwindow.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/QSizeF \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/QTransform \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qnativeinterface.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/QVector \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qvector.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QListWidgetItem \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qlistwidget.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qlistview.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qabstractitemview.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qframe.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qabstractitemmodel.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qstyleoption.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qlocale.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qabstractspinbox.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qvalidator.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qregularexpression.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qslider.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qabstractslider.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qstyle.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtabbar.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtabwidget.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qrubberband.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QMainWindow \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qmainwindow.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QApplication \
 		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qapplication.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qcoreapplication.h \
@@ -479,15 +537,14 @@ debug/main.o: ../Temperature/main.cpp ../Temperature/mainwindow.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qpromise.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qguiapplication.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qinputmethod.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qlocale.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qguiapplication_platform.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\Temperature\main.cpp
 
 debug/mainwindow.o: ../Temperature/mainwindow.cpp ../Temperature/mainwindow.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QMainWindow \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qmainwindow.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtguiglobal.h \
+		../Temperature/serial.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/QSerialPort \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/qserialport.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qiodevice.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qglobal.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qtversionchecks.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qconfig.h \
@@ -530,18 +587,12 @@ debug/mainwindow.o: ../Temperature/mainwindow.cpp ../Temperature/mainwindow.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qtresource.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qttranslation.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qversiontagging.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtgui-config.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtguiexports.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgets-config.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgetsexports.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qwidget.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qwindowdefs.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qiodevicebase.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobject.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobjectdefs.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qnamespace.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qtmetamacros.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobjectdefs_impl.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qwindowdefs_win.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobject.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstring.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qchar.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstringview.h \
@@ -575,7 +626,6 @@ debug/mainwindow.o: ../Temperature/mainwindow.cpp ../Temperature/mainwindow.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qmetatype.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qcompare.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qdatastream.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qiodevicebase.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qfloat16.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qmath.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qiterable.h \
@@ -585,6 +635,20 @@ debug/mainwindow.o: ../Temperature/mainwindow.cpp ../Temperature/mainwindow.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qbindingstorage.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/qserialportglobal.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/qtserialportexports.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/QSerialPortInfo \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/qserialportinfo.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QWidget \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qwidget.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtguiglobal.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtgui-config.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtguiexports.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgets-config.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgetsexports.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qwindowdefs.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qwindowdefs_win.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qmargins.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qaction.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qkeysequence.h \
@@ -626,7 +690,6 @@ debug/mainwindow.o: ../Temperature/mainwindow.cpp ../Temperature/mainwindow.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qcursor.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qbitmap.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qevent.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qiodevice.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qpointer.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qurl.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qeventpoint.h \
@@ -642,7 +705,30 @@ debug/mainwindow.o: ../Temperature/mainwindow.cpp ../Temperature/mainwindow.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/QSizeF \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/QTransform \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qnativeinterface.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/QVector \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qvector.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QListWidgetItem \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qlistwidget.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qlistview.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qabstractitemview.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qframe.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qabstractitemmodel.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qstyleoption.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qlocale.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qabstractspinbox.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qvalidator.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qregularexpression.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qslider.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qabstractslider.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qstyle.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtabbar.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtabwidget.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qrubberband.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QMainWindow \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qmainwindow.h \
 		ui_mainwindow.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/QVariant \
 		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QApplication \
@@ -665,14 +751,16 @@ debug/mainwindow.o: ../Temperature/mainwindow.cpp ../Temperature/mainwindow.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qpromise.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qguiapplication.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qinputmethod.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtCore/qlocale.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qguiapplication_platform.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QListWidget \
 		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QMenuBar \
 		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qmenubar.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qmenu.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QPushButton \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qpushbutton.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qabstractbutton.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QStatusBar \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qstatusbar.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QWidget
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qstatusbar.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o ..\Temperature\mainwindow.cpp
 
 debug/serial.o: ../Temperature/serial.cpp ../Temperature/serial.h \
@@ -770,7 +858,78 @@ debug/serial.o: ../Temperature/serial.cpp ../Temperature/serial.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qbindingstorage.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/qserialportglobal.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/qtserialportexports.h
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/qtserialportexports.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/QSerialPortInfo \
+		../../../../Qt/6.5.0/mingw_64/include/QtSerialPort/qserialportinfo.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QWidget \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qwidget.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtguiglobal.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtgui-config.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtguiexports.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgets-config.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qtwidgetsexports.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qwindowdefs.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qwindowdefs_win.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qmargins.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qaction.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qkeysequence.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qicon.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qsize.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpixmap.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpaintdevice.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qrect.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qpoint.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qcolor.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qrgb.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qrgba64.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qimage.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpixelformat.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtransform.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpolygon.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qregion.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qline.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qvariant.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qstringconverter_base.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qmap.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qset.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qhash.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qvarlengtharray.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/q20memory.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpalette.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qbrush.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qfont.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qfontmetrics.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qfontinfo.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qsizepolicy.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qcursor.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qbitmap.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qevent.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qpointer.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qurl.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qeventpoint.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qvector2d.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qvectornd.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpointingdevice.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qinputdevice.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qscreen.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/QList \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/QObject \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/QRect \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/QSize \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/QSizeF \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/QTransform \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qnativeinterface.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/QVector \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/qvector.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\serial.o ..\Temperature\serial.cpp
 
 debug/moc_mainwindow.o: debug/moc_mainwindow.cpp 

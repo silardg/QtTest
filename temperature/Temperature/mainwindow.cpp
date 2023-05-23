@@ -10,10 +10,12 @@ MainWindow::MainWindow(QWidget *parent)
     // when the scan button is clicked, call the scan function to display the current ports onto the list
     connect(ui->scanButton, SIGNAL (clicked()), this, SLOT (scan()));
 
+    // when an item is clicked, it is forwarded to the function
     connect(ui->listWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(onListClicked(QListWidgetItem*)));
 
     // automatically scan the list and showcase it
     scan();
+
 }
 
 /**
@@ -44,7 +46,13 @@ void MainWindow::onListClicked(QListWidgetItem *item) {
     m_serial->set_selectedPort(item->text());
 
     // open it
-    m_serial->open();
+    if(m_serial->open()) {
+        // move onto the next window
+
+    } else {
+        // error
+        qInfo() << "Couldn't open it!";
+    }
 }
 
 MainWindow::~MainWindow()

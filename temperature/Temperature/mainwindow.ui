@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>324</width>
-    <height>306</height>
+    <width>411</width>
+    <height>287</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,11 +15,14 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QListWidget" name="listWidget">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>281</width>
+      <x>310</x>
+      <y>10</y>
+      <width>91</width>
       <height>201</height>
      </rect>
     </property>
@@ -27,9 +30,9 @@
    <widget class="QPushButton" name="scanButton">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>230</y>
-      <width>281</width>
+      <x>310</x>
+      <y>220</y>
+      <width>91</width>
       <height>24</height>
      </rect>
     </property>
@@ -37,13 +40,33 @@
      <string>Scan Ports</string>
     </property>
    </widget>
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>10</y>
+      <width>291</width>
+      <height>231</height>
+     </rect>
+    </property>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Tab 1</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Tab 2</string>
+     </attribute>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>324</width>
+     <width>411</width>
      <height>21</height>
     </rect>
    </property>
