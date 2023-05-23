@@ -15,12 +15,13 @@ public:
 
     bool open();
     void close();
+    QVector<QString> get_ports();
 private:
     // store the serial object
     QSerialPort *m_serial = nullptr;
 
     // the port info that is being used
-    QSerialPortInfo m_port_chosen;
+    QString m_port_chosen;
 
     // default is 9600
     int m_config_baud = QSerialPort::Baud9600;

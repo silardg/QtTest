@@ -12,9 +12,26 @@ serial::serial(QSerialPort *port, QWidget *parent) : QWidget(parent) {
     // connecting the error signal to the event error function
     connect(m_serial, SIGNAL (errorOccured()), this, SLOT (event_error()));
 
+    // testing hardcoded
+    m_port_chosen = get_ports()[0];
+    open();
+}
+
+/**
+ * @brief serial::get_ports
+ * @return a string vector with the names of the ports
+ */
+QVector<QString> serial::get_ports() {
+
     const auto serialPortInfos = QSerialPortInfo::availablePorts();
-    qDebug() << serialPortInfos.size();
+
+    QVector<QString> availablePorts;
+
     for (const QSerialPortInfo &portInfo : serialPortInfos) {
+
+        availablePorts.append(portInfo.portName());
+
+        // debugging
         qDebug() << "\n"
                  << "Port:" << portInfo.portName() << "\n"
                  << "Location:" << portInfo.systemLocation() << "\n"
@@ -31,9 +48,7 @@ serial::serial(QSerialPort *port, QWidget *parent) : QWidget(parent) {
                          : QByteArray());
     }
 
-    // testing hardcoded
-    m_port_chosen = serialPortInfos[0];
-    open();
+    return availablePorts;
 }
 
 /**
@@ -43,7 +58,7 @@ serial::serial(QSerialPort *port, QWidget *parent) : QWidget(parent) {
 bool serial::open() {
 
     // set the name from the port chosen
-    m_serial->setPortName(m_port_chosen.portName());
+    m_serial->setPortName(m_port_chosen);
 
     // set the parameters. If they are not set to new, default is used
     m_serial->setBaudRate(m_config_baud);
@@ -54,7 +69,7 @@ bool serial::open() {
 
     // try to open it
     if (m_serial->open(m_config_openMode)) {
-        qInfo() << "Opened port at " << m_port_chosen.portName();
+        qInfo() << "Opened port at " << m_port_chosen;
         return 1;
     }
 
@@ -70,7 +85,7 @@ void serial::close() {
     if (m_serial->isOpen())
         m_serial->close();
 
-    qInfo() <<  "Closed port at " <<  m_port_chosen.portName();
+    qInfo() <<  "Closed port at " <<  m_port_chosen;
 }
 
 /**
