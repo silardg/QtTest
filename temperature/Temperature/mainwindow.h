@@ -15,8 +15,12 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    void extracted(QVector<QString> &ports);
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+private slots:
+    void scan();
 
 private:
     Ui::MainWindow *ui;

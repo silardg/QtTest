@@ -7,14 +7,15 @@
  * @param port
  */
 serial::serial(QSerialPort *port, QWidget *parent) : QWidget(parent) {
+
     m_serial = port;
 
     // connecting the error signal to the event error function
-    connect(m_serial, SIGNAL (errorOccured()), this, SLOT (event_error()));
+//    connect(m_serial, SIGNAL (errorOccured()), this, SLOT (event_error()));
 
     // testing hardcoded
-    m_port_chosen = get_ports()[0];
-    open();
+   /* m_port_chosen = get_ports()[0];
+    open();*/
 }
 
 /**
