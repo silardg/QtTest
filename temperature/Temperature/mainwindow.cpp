@@ -16,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent)
     // automatically scan the list and showcase it
     scan();
 
+//    ui->temperatureNumber->display("99");
+
 }
 
 /**
