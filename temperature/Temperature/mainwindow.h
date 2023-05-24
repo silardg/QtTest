@@ -14,10 +14,12 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    void extracted(QVector<QString> &ports);
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void setTemperature(float value);
+    void setHumidity(float value);
+//    void extracted(QVector<QString> &ports);
 private slots:
     void scan();
     void onListClicked(QListWidgetItem *item);

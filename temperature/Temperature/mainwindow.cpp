@@ -16,8 +16,27 @@ MainWindow::MainWindow(QWidget *parent)
     // automatically scan the list and showcase it
     scan();
 
-//    ui->temperatureNumber->display("99");
+    setTemperature(20.1);
+    setHumidity(30.6);
 
+}
+
+/**
+ * @brief MainWindow::setTemperature
+ * @param value
+ */
+void MainWindow::setTemperature(float value) {
+    ui->temperatureLabel->setText(QString::number(value) + "°");
+    ui->temperatureTab->setValue(int(value));
+}
+
+/**
+ * @brief MainWindow::setHumidity
+ * @param value
+ */
+void MainWindow::setHumidity(float value) {
+    ui->humidityLabel->setText(QString::number(value) + "%");
+    ui->humidityTab->setValue(int(value));
 }
 
 /**
