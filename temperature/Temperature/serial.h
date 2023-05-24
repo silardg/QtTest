@@ -9,6 +9,7 @@
 
 class serial : public QWidget
 {
+    Q_OBJECT
 public:
     serial(QSerialPort *port = nullptr, QWidget *parent = nullptr);
     ~serial();
@@ -25,15 +26,16 @@ private:
     QString m_port_chosen;
 
     // default is 9600
-    int m_config_baud = QSerialPort::Baud9600;
+    int m_config_baud = 460800;// QSerialPort::Baud9600;
     QSerialPort::DataBits m_config_databits = QSerialPort::Data8;
-    QSerialPort::Parity m_config_parity = QSerialPort::EvenParity;
+    QSerialPort::Parity m_config_parity = QSerialPort::NoParity;
     QSerialPort::StopBits m_config_stopbit = QSerialPort::OneStop;
-    QSerialPort::FlowControl m_config_flow = QSerialPort::NoFlowControl;
+    QSerialPort::FlowControl m_config_flow = QSerialPort::HardwareControl;
     QIODevice::OpenModeFlag m_config_openMode = QIODevice::ReadWrite;
 
-private slots:
+public slots:
     void event_error(QSerialPort::SerialPortError error);
+    void readUART();
 
 };
 

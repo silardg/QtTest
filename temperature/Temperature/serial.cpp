@@ -1,4 +1,5 @@
 #include "serial.h"
+#include "qobjectdefs.h"
 
 #include <QDebug>
 
@@ -9,6 +10,8 @@
 serial::serial(QSerialPort *port, QWidget *parent) : QWidget(parent) {
 
     m_serial = port;
+
+    connect(m_serial, &QSerialPort::readyRead, this, &serial::readUART);
 }
 
 /**
@@ -61,9 +64,14 @@ bool serial::open() {
     m_serial->setStopBits(m_config_stopbit);
     m_serial->setFlowControl(m_config_flow);
 
+
     // try to open it
     if (m_serial->open(m_config_openMode)) {
+
+        m_serial->setDataTerminalReady(true);
+
         qInfo() << "Opened port at " << m_port_chosen;
+
         return 1;
     }
 
@@ -90,6 +98,13 @@ void serial::event_error(QSerialPort::SerialPortError error) {
     // TODO extend this a bit
     qInfo() << "Error in the serial communication";
     close();
+}
+
+void serial::readUART() {
+    QByteArray data = m_serial->readAll();
+    qInfo() << data;
+
+    qInfo() << "Ready something";
 }
 
 void serial::set_selectedPort(QString port) {

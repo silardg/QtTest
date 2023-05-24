@@ -16,8 +16,8 @@ MainWindow::MainWindow(QWidget *parent)
     // automatically scan the list and showcase it
     scan();
 
-    setTemperature(20.1);
-    setHumidity(30.6);
+//    setTemperature(20.1);
+//    setHumidity(30.6);
 
 }
 
