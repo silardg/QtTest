@@ -17,9 +17,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void getSensorData();
     void setTemperature(float value);
     void setHumidity(float value);
-//    void extracted(QVector<QString> &ports);
 private slots:
     void scan();
     void onListClicked(QListWidgetItem *item);

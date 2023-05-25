@@ -13,12 +13,28 @@ MainWindow::MainWindow(QWidget *parent)
     // when an item is clicked, it is forwarded to the function
     connect(ui->listWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(onListClicked(QListWidgetItem*)));
 
+
+    connect(m_serial, &serial::sensorDataReceived, this, &MainWindow::getSensorData);
+
     // automatically scan the list and showcase it
     scan();
 
-//    setTemperature(20.1);
-//    setHumidity(30.6);
+    setTemperature(0.0);
+    setHumidity(0.0);
 
+}
+
+/**
+ * @brief MainWindow::getSensorData
+ */
+void MainWindow::getSensorData() {
+    // get the temperature and humidity values, the newest
+    float temp = m_serial->getTemperature();
+    float hum = m_serial->getHumidity();
+
+    // set the values onto the UI
+    setTemperature(temp);
+    setHumidity(hum);
 }
 
 /**
@@ -26,8 +42,24 @@ MainWindow::MainWindow(QWidget *parent)
  * @param value
  */
 void MainWindow::setTemperature(float value) {
-    ui->temperatureLabel->setText(QString::number(value) + "°");
-    ui->temperatureTab->setValue(int(value));
+
+    switch(m_serial->getSensorStatus()) {
+    case 0: {
+        ui->temperatureLabel->setText(QString::number(value) + "°");
+        ui->temperatureTab->setValue(int(value));
+        break;
+    }
+    case -1: {
+        ui->temperatureLabel->setText("ChkSum");
+        ui->temperatureTab->setValue(0.0f);
+        break;
+    }
+    case -2: {
+        ui->temperatureLabel->setText("Timeout");
+        ui->temperatureTab->setValue(0.0f);
+        break;
+    }
+    }
 }
 
 /**
@@ -35,8 +67,24 @@ void MainWindow::setTemperature(float value) {
  * @param value
  */
 void MainWindow::setHumidity(float value) {
-    ui->humidityLabel->setText(QString::number(value) + "%");
-    ui->humidityTab->setValue(int(value));
+
+    switch(m_serial->getSensorStatus()) {
+    case 0: {
+        ui->humidityLabel->setText(QString::number(value) + "°");
+        ui->humidityTab->setValue(int(value));
+        break;
+    }
+    case -1: {
+        ui->humidityLabel->setText("ChkSum");
+        ui->humidityTab->setValue(0.0f);
+        break;
+    }
+    case -2: {
+        ui->humidityLabel->setText("Timeout");
+        ui->humidityTab->setValue(0.0f);
+        break;
+    }
+    }
 }
 
 /**

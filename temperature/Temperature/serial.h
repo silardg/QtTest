@@ -19,6 +19,10 @@ public:
     QVector<QString> get_ports();
     void set_selectedPort(QString port);
 
+    float getTemperature();
+    float getHumidity();
+    int getSensorStatus();
+
 private:
     // store the serial object
     QSerialPort *m_serial = nullptr;
@@ -36,9 +40,16 @@ private:
 
     QString rawData;
 
+    float m_temperature, m_humidity;
+    int m_sensorStatus;
+
 public slots:
     void event_error(QSerialPort::SerialPortError error);
     void readUART();
+
+signals:
+    void sensorDataReceived();
+
 
 };
 

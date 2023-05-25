@@ -114,11 +114,27 @@ void serial::readUART() {
             // get the \r\n down
             rawData.chop(2);
             QStringList data = rawData.split(',');
-            qInfo() << "Temperature: " << data[0] << "Humidity: " << data[1];
+            qInfo() << "Temperature: " << data[1] << "Humidity: " << data[2] << "Status: " << data[0];
+            m_temperature = data[1].toFloat();
+            m_humidity = data[2].toFloat();
+            m_sensorStatus = data[0].toInt();
+            sensorDataReceived();
             rawData = "";
         }
     }
 
+}
+
+float serial::getTemperature() {
+    return m_temperature;
+}
+
+float serial::getHumidity() {
+    return m_humidity;
+}
+
+int serial::getSensorStatus() {
+    return m_sensorStatus;
 }
 
 void serial::set_selectedPort(QString port) {
