@@ -49,6 +49,7 @@ public:
     QDial *humidityTab;
     QLabel *label_10;
     QWidget *tabOther;
+    QPushButton *disconnectButton;
     QMenuBar *menubar;
     QMenu *menuSerialWeather;
     QStatusBar *statusbar;
@@ -63,10 +64,10 @@ public:
         listWidget = new QListWidget(centralwidget);
         listWidget->setObjectName("listWidget");
         listWidget->setEnabled(true);
-        listWidget->setGeometry(QRect(320, 10, 91, 161));
+        listWidget->setGeometry(QRect(320, 10, 91, 131));
         scanButton = new QPushButton(centralwidget);
         scanButton->setObjectName("scanButton");
-        scanButton->setGeometry(QRect(320, 180, 91, 24));
+        scanButton->setGeometry(QRect(320, 150, 91, 24));
         tabs = new QTabWidget(centralwidget);
         tabs->setObjectName("tabs");
         tabs->setGeometry(QRect(10, 10, 291, 201));
@@ -153,6 +154,10 @@ public:
         tabOther = new QWidget();
         tabOther->setObjectName("tabOther");
         tabs->addTab(tabOther, QString());
+        disconnectButton = new QPushButton(centralwidget);
+        disconnectButton->setObjectName("disconnectButton");
+        disconnectButton->setEnabled(false);
+        disconnectButton->setGeometry(QRect(320, 180, 91, 24));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -193,6 +198,7 @@ public:
         label_10->setText(QCoreApplication::translate("MainWindow", "50%", nullptr));
         tabs->setTabText(tabs->indexOf(tabHumidity), QCoreApplication::translate("MainWindow", "Humidity", nullptr));
         tabs->setTabText(tabs->indexOf(tabOther), QCoreApplication::translate("MainWindow", "Other", nullptr));
+        disconnectButton->setText(QCoreApplication::translate("MainWindow", "Disconnect", nullptr));
         menuSerialWeather->setTitle(QCoreApplication::translate("MainWindow", "About", nullptr));
     } // retranslateUi
 

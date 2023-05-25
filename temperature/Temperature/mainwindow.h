@@ -20,6 +20,9 @@ public:
     void getSensorData();
     void setTemperature(float value);
     void setHumidity(float value);
+
+    void serialConnected();
+    void serialDisconnect();
 private slots:
     void scan();
     void onListClicked(QListWidgetItem *item);

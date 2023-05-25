@@ -23,7 +23,7 @@
       <x>320</x>
       <y>10</y>
       <width>91</width>
-      <height>161</height>
+      <height>131</height>
      </rect>
     </property>
    </widget>
@@ -31,7 +31,7 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>180</y>
+      <y>150</y>
       <width>91</width>
       <height>24</height>
      </rect>
@@ -331,6 +331,22 @@
       <string>Other</string>
      </attribute>
     </widget>
+   </widget>
+   <widget class="QPushButton" name="disconnectButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>180</y>
+      <width>91</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Disconnect</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

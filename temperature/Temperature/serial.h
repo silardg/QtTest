@@ -11,6 +11,13 @@ class serial : public QWidget
 {
     Q_OBJECT
 public:
+
+    enum DHTStatus {
+        DHT_OK = 0,
+        DHT_CHECKSUM_ERROR,
+        DHT_TIMEOUT_ERROR
+    };
+
     serial(QSerialPort *port = nullptr, QWidget *parent = nullptr);
     ~serial();
 
@@ -41,7 +48,7 @@ private:
     QString rawData;
 
     float m_temperature, m_humidity;
-    int m_sensorStatus;
+    int m_sensorStatus = -3;
 
 public slots:
     void event_error(QSerialPort::SerialPortError error);
@@ -49,6 +56,7 @@ public slots:
 
 signals:
     void sensorDataReceived();
+    void connected();
 
 
 };

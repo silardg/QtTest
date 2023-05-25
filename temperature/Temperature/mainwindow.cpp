@@ -13,15 +13,17 @@ MainWindow::MainWindow(QWidget *parent)
     // when an item is clicked, it is forwarded to the function
     connect(ui->listWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(onListClicked(QListWidgetItem*)));
 
-
+    // when there is sensor data received, we will send a signal
     connect(m_serial, &serial::sensorDataReceived, this, &MainWindow::getSensorData);
+
+    connect(m_serial, &serial::connected, this, &MainWindow::serialConnected);
+    connect(ui->disconnectButton, &QPushButton::clicked, this, &MainWindow::serialDisconnect);
 
     // automatically scan the list and showcase it
     scan();
 
     setTemperature(0.0);
     setHumidity(0.0);
-
 }
 
 /**
@@ -59,6 +61,11 @@ void MainWindow::setTemperature(float value) {
         ui->temperatureTab->setValue(0.0f);
         break;
     }
+    case -3: {
+        ui->temperatureLabel->setText("0.0°");
+        ui->temperatureTab->setValue(0.0f);
+        break;
+    }
     }
 }
 
@@ -70,7 +77,7 @@ void MainWindow::setHumidity(float value) {
 
     switch(m_serial->getSensorStatus()) {
     case 0: {
-        ui->humidityLabel->setText(QString::number(value) + "°");
+        ui->humidityLabel->setText(QString::number(value) + "%");
         ui->humidityTab->setValue(int(value));
         break;
     }
@@ -84,7 +91,25 @@ void MainWindow::setHumidity(float value) {
         ui->humidityTab->setValue(0.0f);
         break;
     }
+    case -3: {
+        ui->humidityLabel->setText("0.0%");
+        ui->humidityTab->setValue(0.0f);
+        break;
     }
+    }
+}
+
+void MainWindow::serialDisconnect() {
+    qInfo() << "Disconnect";
+    m_serial->close();
+    ui->disconnectButton->setDisabled(true);
+
+    getSensorData();
+}
+
+void MainWindow::serialConnected() {
+    qInfo() << "Not disabled";
+    ui->disconnectButton->setDisabled(false);
 }
 
 /**

@@ -1,5 +1,3 @@
-
-
 #include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -15,17 +13,14 @@ void DHT_task(void *pvParameter)
 {
 	setDHTgpio( 4 );
 
-	while(1) {
-	
-        while(1) {
-            int ret = readDHT();
+    while(true) {
+        int ret = readDHT();
 
-            char str[50];
-            sprintf(str, "%d,%.1f,%.1f\n", ret, getTemperature(), getHumidity());
-            printf(str);
-            vTaskDelay(3000 / portTICK_PERIOD_MS);
-        }
-	}
+        char str[50];
+        sprintf(str, "%d,%.1f,%.1f\n", ret, getTemperature(), getHumidity());
+        printf(str);
+        vTaskDelay(3000 / portTICK_PERIOD_MS);
+    }
 }
 
 void app_main()

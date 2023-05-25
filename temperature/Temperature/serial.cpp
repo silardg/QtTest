@@ -78,6 +78,8 @@ bool serial::open() {
 
         qInfo() << "Opened port at " << m_port_chosen;
 
+        connected();
+
         return 1;
     }
 
@@ -92,6 +94,8 @@ void serial::close() {
     // if it is open, force close it
     if (m_serial->isOpen())
         m_serial->close();
+
+    m_sensorStatus = -3;
 
     qInfo() <<  "Closed port at " <<  m_port_chosen;
 }
