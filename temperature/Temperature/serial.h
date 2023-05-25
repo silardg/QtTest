@@ -18,6 +18,7 @@ public:
     void close();
     QVector<QString> get_ports();
     void set_selectedPort(QString port);
+
 private:
     // store the serial object
     QSerialPort *m_serial = nullptr;
@@ -32,6 +33,8 @@ private:
     QSerialPort::StopBits m_config_stopbit = QSerialPort::OneStop;
     QSerialPort::FlowControl m_config_flow = QSerialPort::HardwareControl;
     QIODevice::OpenModeFlag m_config_openMode = QIODevice::ReadWrite;
+
+    QString rawData;
 
 public slots:
     void event_error(QSerialPort::SerialPortError error);

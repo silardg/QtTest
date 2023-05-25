@@ -3,6 +3,12 @@
 
 #include <QDebug>
 
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonValue>
+#include <QJsonParseError>
+
 /**
  * @brief serial::serial
  * @param port
@@ -63,7 +69,7 @@ bool serial::open() {
     m_serial->setParity(m_config_parity);
     m_serial->setStopBits(m_config_stopbit);
     m_serial->setFlowControl(m_config_flow);
-
+    m_serial->setReadBufferSize(0);
 
     // try to open it
     if (m_serial->open(m_config_openMode)) {
@@ -101,10 +107,18 @@ void serial::event_error(QSerialPort::SerialPortError error) {
 }
 
 void serial::readUART() {
-    QByteArray data = m_serial->readAll();
-    qInfo() << data;
 
-    qInfo() << "Ready something";
+    if (m_serial->bytesAvailable() > 5) {
+        rawData += m_serial->readLine();
+        if (/*test.contains("[|]") && test.contains("[&]")  && */rawData.contains("\r\n")) {
+            // get the \r\n down
+            rawData.chop(2);
+            QStringList data = rawData.split(',');
+            qInfo() << "Temperature: " << data[0] << "Humidity: " << data[1];
+            rawData = "";
+        }
+    }
+
 }
 
 void serial::set_selectedPort(QString port) {
