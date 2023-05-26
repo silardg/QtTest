@@ -15,8 +15,10 @@
  */
 serial::serial(QSerialPort *port, QWidget *parent) : QWidget(parent) {
 
+    // set the serial object
     m_serial = port;
 
+    // connect the readyread function
     connect(m_serial, &QSerialPort::readyRead, this, &serial::readUART);
 }
 
@@ -26,12 +28,16 @@ serial::serial(QSerialPort *port, QWidget *parent) : QWidget(parent) {
  */
 QVector<QString> serial::get_ports() {
 
+    // get an array of the available ports
     const auto serialPortInfos = QSerialPortInfo::availablePorts();
 
+    // create a vector string
     QVector<QString> availablePorts;
 
+    // loop the ports available
     for (const QSerialPortInfo &portInfo : serialPortInfos) {
 
+        // append it
         availablePorts.append(portInfo.portName());
 
         // debugging
@@ -51,6 +57,7 @@ QVector<QString> serial::get_ports() {
                          : QByteArray());
     }
 
+    // return the read vector strings
     return availablePorts;
 }
 
@@ -64,6 +71,7 @@ bool serial::open() {
     m_serial->setPortName(m_port_chosen);
 
     // set the parameters. If they are not set to new, default is used
+    // TODO be able to change these
     m_serial->setBaudRate(m_config_baud);
     m_serial->setDataBits(m_config_databits);
     m_serial->setParity(m_config_parity);
@@ -78,6 +86,7 @@ bool serial::open() {
 
         qInfo() << "Opened port at " << m_port_chosen;
 
+        // call the connected signal
         connected();
 
         return 1;
@@ -95,6 +104,7 @@ void serial::close() {
     if (m_serial->isOpen())
         m_serial->close();
 
+    // set the sensor status
     m_sensorStatus = -3;
 
     qInfo() <<  "Closed port at " <<  m_port_chosen;
@@ -110,41 +120,73 @@ void serial::event_error(QSerialPort::SerialPortError error) {
     close();
 }
 
+/**
+ * @brief serial::readUART
+ */
 void serial::readUART() {
-
     if (m_serial->bytesAvailable() > 5) {
         rawData += m_serial->readLine();
+        // TODO put this part into a separate class or file
         if (/*test.contains("[|]") && test.contains("[&]")  && */rawData.contains("\r\n")) {
             // get the \r\n down
             rawData.chop(2);
+            // split the data by ,
             QStringList data = rawData.split(',');
+            // debug
             qInfo() << "Temperature: " << data[1] << "Humidity: " << data[2] << "Status: " << data[0];
+            // TODO set index names
+            // get the temperature
             m_temperature = data[1].toFloat();
+            // get the humidity
             m_humidity = data[2].toFloat();
+            // get the status
             m_sensorStatus = data[0].toInt();
+            // call the event
             sensorDataReceived();
+            // reset the buffer
             rawData = "";
         }
     }
 
 }
 
+/**
+ * @brief serial::getTemperature
+ * @return current temperature
+ */
 float serial::getTemperature() {
     return m_temperature;
 }
 
+/**
+ * @brief serial::getHumidity
+ * @return current humidity
+ */
 float serial::getHumidity() {
     return m_humidity;
 }
 
+/**
+ * @brief serial::getSensorStatus
+ * @return sensor status
+ */
 int serial::getSensorStatus() {
     return m_sensorStatus;
 }
 
+/**
+ * @brief serial::set_selectedPort
+ * @param port
+ */
 void serial::set_selectedPort(QString port) {
     m_port_chosen = port;
+
+    open();
 }
 
+/**
+ * @brief serial::~serial
+ */
 serial::~serial() {
     // on destruction, always close it
     close();

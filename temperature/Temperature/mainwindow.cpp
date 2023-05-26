@@ -16,12 +16,17 @@ MainWindow::MainWindow(QWidget *parent)
     // when there is sensor data received, we will send a signal
     connect(m_serial, &serial::sensorDataReceived, this, &MainWindow::getSensorData);
 
+    // connect the serial connected function to signal that we have connected
+    // this is used to enable the disable button
     connect(m_serial, &serial::connected, this, &MainWindow::serialConnected);
+
+    // connect the disconnect button to a function
     connect(ui->disconnectButton, &QPushButton::clicked, this, &MainWindow::serialDisconnect);
 
     // automatically scan the list and showcase it
     scan();
 
+    // default
     setTemperature(0.0);
     setHumidity(0.0);
 }
@@ -45,9 +50,13 @@ void MainWindow::getSensorData() {
  */
 void MainWindow::setTemperature(float value) {
 
+    // depending on the sensor status, we write values
     switch(m_serial->getSensorStatus()) {
     case 0: {
+        // as its a temperature, we add the celsius
+        // TODO add conversion between celsius and the american way
         ui->temperatureLabel->setText(QString::number(value) + "°");
+        // set the value of the knob/tab
         ui->temperatureTab->setValue(int(value));
         break;
     }
@@ -74,9 +83,13 @@ void MainWindow::setTemperature(float value) {
  * @param value
  */
 void MainWindow::setHumidity(float value) {
+    //TODO setTemperature and setHumidity has most of the same code, we can create an optimization here
 
+    // depending on the sensor status, we write values
     switch(m_serial->getSensorStatus()) {
     case 0: {
+        // as its a temperature, we add the celsius
+        // TODO add conversion between celsius and the american way
         ui->humidityLabel->setText(QString::number(value) + "%");
         ui->humidityTab->setValue(int(value));
         break;
@@ -99,16 +112,25 @@ void MainWindow::setHumidity(float value) {
     }
 }
 
+/**
+ * @brief MainWindow::serialDisconnect
+ */
 void MainWindow::serialDisconnect() {
-    qInfo() << "Disconnect";
+    // when the disconnect button is clicked
+    // force close serial and disable the button
+    // TODO check if it was really disconnected
     m_serial->close();
     ui->disconnectButton->setDisabled(true);
 
+    // update the UI
     getSensorData();
 }
 
+/**
+ * @brief MainWindow::serialConnected
+ */
 void MainWindow::serialConnected() {
-    qInfo() << "Not disabled";
+    // enable the disconnect button
     ui->disconnectButton->setDisabled(false);
 }
 
@@ -138,20 +160,13 @@ void MainWindow::onListClicked(QListWidgetItem *item) {
 
     // set the variable for the port name
     m_serial->set_selectedPort(item->text());
-
-    // open it
-    if(m_serial->open()) {
-        // move onto the next window
-
-    } else {
-        // error
-        qInfo() << "Couldn't open it!";
-    }
 }
 
+/**
+ * @brief MainWindow::~MainWindow
+ */
 MainWindow::~MainWindow()
 {
-    qInfo() << "Destroy main window";
     delete ui;
 }
 

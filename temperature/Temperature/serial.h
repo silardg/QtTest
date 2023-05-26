@@ -12,12 +12,6 @@ class serial : public QWidget
     Q_OBJECT
 public:
 
-    enum DHTStatus {
-        DHT_OK = 0,
-        DHT_CHECKSUM_ERROR,
-        DHT_TIMEOUT_ERROR
-    };
-
     serial(QSerialPort *port = nullptr, QWidget *parent = nullptr);
     ~serial();
 
@@ -37,7 +31,6 @@ private:
     // the port info that is being used
     QString m_port_chosen;
 
-    // default is 9600
     int m_config_baud = 460800;// QSerialPort::Baud9600;
     QSerialPort::DataBits m_config_databits = QSerialPort::Data8;
     QSerialPort::Parity m_config_parity = QSerialPort::NoParity;
